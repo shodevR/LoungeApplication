@@ -1,0 +1,12 @@
+modules = ["web", "java-graalvm22.3"]
+
+[nix]
+channel = "stable-23_11"
+
+[[ports]]
+localPort = 8888
+externalPort = 3000
+
+[[ports]]
+localPort = 8888
+externalPort = 80
