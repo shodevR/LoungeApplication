@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Ticket Details</title>
+    <link rel="stylesheet" href="VoucherList.css">
+    <link rel="stylesheet" href="create-voucher.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .ticket-details {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Customer Ticket Details</h1>
+    <div id="ticket-details" class="ticket-details">
+        Loading...
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pathArray = window.location.pathname.split('/');
+        const ticketId = pathArray[pathArray.length - 1];
+
+        if (ticketId) {
+            fetch(`/api/ticket/details/${ticketId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(ticket => {
+                    const ticketDetailsDiv = document.getElementById('ticket-details');
+                    ticketDetailsDiv.innerHTML = `
+                            <p><strong>Ticket ID:</strong> ${ticket.ticketId}</p>
+                            <p><strong>Ticket Type:</strong> ${ticket.ticketType}</p>
+                            <p><strong>PNR:</strong> ${ticket.pnr}</p>
+                            <p><strong>Airline Name:</strong> ${ticket.airlineName}</p>
+                            <p><strong>Flight Number:</strong> ${ticket.flightNumber}</p>
+                            <p><strong>First Name:</strong> ${ticket.firstName}</p>
+                            <p><strong>Last Name:</strong> ${ticket.lastName}</p>
+                            <p><strong>Date:</strong> ${ticket.date}</p>
+                            <p><strong>Payment Method:</strong> ${ticket.paymentMethod}</p>
+                            <p><strong>Amount:</strong> ${ticket.Amount}</p>
+                            <p><strong>Voucher Code:</strong> ${ticket.voucherCode}</p>
+                            <p><strong>Created By:</strong> ${ticket.createdBy}</p>
+                        `;
+                })
+                .catch(error => {
+                    const ticketDetailsDiv = document.getElementById('ticket-details');
+                    ticketDetailsDiv.innerHTML = `Error: ${error.message}`;
+                });
+        } else {
+            const ticketDetailsDiv = document.getElementById('ticket-details');
+            ticketDetailsDiv.innerHTML = 'No ticket ID provided in the URL.';
+        }
+    });
+</script>
+</body>
+</html>

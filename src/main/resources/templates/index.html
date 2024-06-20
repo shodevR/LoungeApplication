@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ticket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="walkin.css">
+    <link rel="stylesheet" href="loungeAccessCard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+<input type="hidden" name="_csrf" th:value="${_csrf.token}">
+<input id="username" type="hidden" name="_csrf" th:value="${username}">
+
+
+<div class="container-fluid p-0 m-0">
+    <div class="container-fluid px-4" style="display: flex;flex-direction: row;justify-content: space-between">
+        <div class="walkinLogo">
+            <img src="/images/Colourlogo.png" alt="" class="py-2">
+        </div>
+        <form th:action="@{/logout}" method="post" style="width:12%">
+            <button  class="walkinLogoutBtn">
+                <img src="/images/VoucherList/LogoutIcon.png" alt="" style="margin-top: -3.5%;">
+                <span class="tab-text mx-2">LogOut</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="container-fluid walkinContainer">
+        <div class="container py-3">
+            <div class="ticketNumDiv d-flex mt-5">
+                <!--                <h5 class="my-2 mx-4">Ticket</h5>-->
+                <button id="dateButton">01-01-2024</button>
+            </div>
+            <div class="container d-flex mt-4">
+                <div class="container mt-5">
+                    <ul class="nav nav-tabs tabContainer" id="myTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link custom-tab active" id="tab1-tab" data-bs-toggle="tab"
+                                    data-bs-target="#tab1" href="#tab1" type="button" role="tab" aria-controls="tab1"
+                                    aria-selected="true">
+                                <div class="tab-content-center">
+                                    <img src="/images/WalkIn/walkin.png" alt="" class="tab-icon">
+                                    <span class="tab-text"  name="ticketType">Walkin</span>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link custom-tab" id="tab2-tab" data-bs-toggle="tab"
+                                    data-bs-target="#tab2" href="#tab1" type="button" role="tab" aria-controls="tab2"
+                                    aria-selected="false">
+                                <div class="tab-content-center">
+                                    <img src="/images/WalkIn/Voucher.png" alt="" class="tab-icon">
+                                    <span class="tab-text"  name="ticketType">Voucher</span>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link custom-tab" id="tab3-tab" data-bs-toggle="tab"
+                                    data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3"
+                                    aria-selected="false">
+                                <div class="tab-content-center">
+                                    <img src="/images/WalkIn/partner.png" alt="" class="tab-icon">
+                                    <span class="tab-text"  name="ticketType">Partners</span>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-5" id="myTabsContent">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                            <div class="inputBoxContainer">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="firstName" name="firstName" class="textfield__input" required>
+                                    <label for="firstName" class="textfield__label textfield__label--required">First Name</label>
+                                    <div id="firstNameWarning" class="warning" style="display: none;">Please enter your first name</div>
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="lastName" name="lastName" class="textfield__input" required>
+                                    <label for="lastName" class="textfield__label textfield__label--required">Last Name</label>
+                                    <div id="lastNameWarning" class="warning" style="display: none;">Please enter your last name</div>
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="flightNumber" name="flightNumber" class="textfield__input" required>
+                                    <label for="flightNumber" class="textfield__label textfield__label--required">Flight Number</label>
+                                    <div id="flightNumberWarning" class="warning" style="display: none;">Please enter your flight number</div>
+                                </fieldset>
+                            </div>
+
+                            <div class="mt-5">
+                                <h5>Select Package</h5>
+                                <div class="packageCardContainer" id="packageContainer">
+                                    <!-- Package cards will be dynamically inserted here -->
+
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <h5>Upload Document</h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button id="passportCaptureButton" class="PassportButton" onclick="openWebcamPopup(),changedoc(1)"
+                                                data-type="passport">Passport <span class="text-danger">*</span></button>
+
+
+
+                                    </div>
+                                    <div>
+                                        <button id="boardingPassCaptureButton" class="PassportButton" onclick="openWebcamPopup(),changedoc(2)"
+                                                data-type="boarding-pass">Boarding Pass <span class="text-danger">*</span></button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="boardingPassCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button id="idCaptureButton" class="walkinIdButton " onclick="openWebcamPopup(),changedoc(3)" data-type="id"
+                                                disabled>Corporate ID</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="idCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button id="otherCaptureButton" class="PassportButton" onclick="openWebcamPopup(),changedoc(4)"
+                                                data-type="other">Other</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="otherCapturedImage"> -->
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <h5>Select Payment Method <span class="text-danger">*</span></h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button class="paymentButtonWalkin" value="cash" onclick="selectPaymentWalkin(this, 'cash')">Cash</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButtonWalkin" value="Credit/Debit Card" onclick="selectPaymentWalkin(this, 'Credit/Debit Card')">Credit/Debit Card</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButtonWalkin" value="Paypal" onclick="selectPaymentWalkin(this, 'Paypal')">Paypal</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButtonWalkin" value="Other" onclick="selectPaymentWalkin(this, 'Other')">Other</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="mt-5">
+                                <a href="/Walkin.html" class="addGuestBtn">
+                                    <img src="/images/WalkIn/add.png" alt="">
+                                    <p>Add Guest</p>
+                                </a>
+                            </div> -->
+
+                            <div class="mt-4">
+                                <button class="walkinSaveBtn"  onclick="validateAndSubmit()">Save & Print</button>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                            <div class="inputBoxContainer1">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="voucherIdInput" name="voucherIdInput" class="textfield__input" required>
+                                    <label for="voucherIdInput" class="textfield__label textfield__label--required">Voucher Number</label>
+                                    <div id="voucherIdInputWarning" class="warning" style="display: none;">Please enter the voucher number</div>
+
+                                </fieldset>
+
+                                <button type="button" class="PassportButton" style="width:13%;padding: 6px 15px" onclick="fetchVoucherDetails()">Get Details</button>
+
+
+
+                            </div>
+                            <div class="inputBoxContainer1 mt-4">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="clientName" name="clientName" class="textfield__input" required disabled>
+                                    <label for="clientName" class="textfield__label textfield__label--required">Client Name</label>
+                                    <div id="clientNameWarning" class="warning" style="display: none;">Please enter the client name</div>
+                                </fieldset>
+                            </div>
+                            <div class="inputBoxContainer mt-4">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="firstName2" name="firstName2" class="textfield__input" required>
+                                    <label for="firstName2" class="textfield__label textfield__label--required">First Name</label>
+                                    <div id="firstName2Warning" class="warning" style="display: none;">Please enter your first name</div>
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="lastName2" name="lastName2" class="textfield__input" required>
+                                    <label for="lastName2" class="textfield__label textfield__label--required">Last Name</label>
+                                    <div id="lastName2Warning" class="warning" style="display: none;">Please enter your last name</div>
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="flightNumber2" name="flightNumber2" class="textfield__input" required>
+                                    <label for="flightNumber2" class="textfield__label textfield__label--required">Flight Number</label>
+                                    <div id="flightNumber2Warning" class="warning" style="display: none;">Please enter your flight number</div>
+                                </fieldset>
+                            </div>
+
+                            <div class="mt-5" id="voucherPackage">
+                                <!-- Dynamic content will be injected here -->
+                            </div>
+
+                            <div class="my-5">
+                                <h5 class="voucherupgradeHeading">Upgrade</h5>
+                                <div class="packageCardContainer" id="packageContainer2">
+                                    <!-- Package cards will be dynamically inserted here -->
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <h5>Upload Document</h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(1)"
+                                                 data-type="passport">Passport <span class="text-danger">*</span></button>
+
+
+
+                                    </div>
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(2)"
+                                                 data-type="boarding-pass">Boarding Pass <span class="text-danger">*</span></button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="boardingPassCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(3)" data-type="id"
+                                        >Corporate ID</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="idCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(4)"
+                                                 data-type="other">Other</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="otherCapturedImage"> -->
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <h5>Balance Payment Method</h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button class="paymentButton1" value="cash" onclick="selectPayment(this, 'cash')" disabled>Cash</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Credit/Debit Card" onclick="selectPayment(this, 'Credit/Debit Card')" disabled>Credit/Debit Card</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Paypal" onclick="selectPayment(this, 'Paypal')"disabled>Paypal</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Other" onclick="selectPayment(this, 'Other')"disabled>Other</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="mt-4">
+                                <button class="walkinSaveBtn" onclick="validateAndSubmitTab2()">Save & Print</button>
+                            </div>
+
+
+                            <div class="mt-5">
+                                <a href="#addGuestForm" class="addGuestBtn" onclick="toggleAddGuestForm()">
+                                    <img src="/images/WalkIn/add.png" alt="">
+                                    <p>Add Guest</p>
+                                </a>
+
+                                <!-- add guest tab -->
+                                <div id="addGuestForm" style="display: none;">
+                                    <div class="inputBoxContainer mt-4">
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestfirstName2" name="guestfirstName2" class="textfield__input" required>
+                                            <label for="guestfirstName2" class="textfield__label textfield__label--required">First Name</label>
+                                            <div id="guestfirstName2Warning" class="warning" style="display: none;">Please enter your first name</div>
+                                        </fieldset>
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestlastName2" name="guestlastName2" class="textfield__input" required>
+                                            <label for="guestlastName2" class="textfield__label textfield__label--required">Last Name</label>
+                                            <div id="guestlastName2Warning" class="warning" style="display: none;">Please enter your last name</div>
+                                        </fieldset>
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestflightNumber2" name="flightNumber2" class="textfield__input" required>
+                                            <label for="guestflightNumber2" class="textfield__label textfield__label--required">Flight Number</label>
+                                            <div id="guestflightNumber2Warning" class="warning" style="display: none;">Please enter your flight number</div>
+                                        </fieldset>
+                                    </div>
+
+
+
+                                    <div class="my-5">
+                                        <h5 class="voucherupgradeHeading">Package</h5>
+                                        <div class="packageCardContainer" id="guestpackageContainer">
+                                            <!-- Package cards will be dynamically inserted here -->
+                                        </div>
+                                    </div>
+                                    <div class="mt-5">
+                                        <h5>Upload Document</h5>
+                                        <div class="uploadDocumentDiv">
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(1)" data-type="passport">Passport <span class="text-danger">*</span></button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(2)" data-type="boarding-pass">Boarding Pass <span class="text-danger">*</span></button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(3)" data-type="id">Corporate ID</button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(4)" data-type="other">Other</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <h5>Balance Payment Method</h5>
+                                        <div class="uploadDocumentDiv">
+                                            <div>
+                                                <button class="paymentButton1" value="cash" onclick="selectPayment(this, 'cash')" >Cash</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Credit/Debit Card" onclick="selectPayment(this, 'Credit/Debit Card')" >Credit/Debit Card</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Paypal" onclick="selectPayment(this, 'Paypal')" >Paypal</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Other" onclick="selectPayment(this, 'Other')" >Other</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mt-5">
+                                        <button class="walkinSaveBtn" onclick="guestvalidateAndSubmitTab2()">Save & Print</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                            <div class="inputBoxContainer">
+                                <select id="airlineSelect" name="airline" >
+                                    <div id="airlineSelectWarning" class="warning" style="display: none;">Please select Partner Type</div>
+                                </select>
+
+                                <!-- Search input for filtering partners -->
+                                <input type="text" id="partnerSearch" placeholder="Search Partner" style="display: none;">
+
+                                <select id="partnerSelect" name="airline">
+                                    <option>Partner Name</option>
+                                    <!-- Options will be populated here -->
+                                </select>
+                                <div id="partnerSelectWarning" class="warning" style="display: none;">Please select Partner Name</div>
+                            </div>
+
+                            <div class="inputBoxContainer mt-4">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="sequence" name="sequence" class="textfield__input" required>
+                                    <label for="sequence" class="textfield__label textfield__label--required">PNR / Sequence</label>
+                                </fieldset>
+                                <div id="sequenceWarning" class="warning" style="display: none;">Please enter the sequence</div>
+                            </div>
+
+                            <div class="inputBoxContainer mt-4">
+                                <fieldset class="textfield textfield--light">
+                                    <input id="firstName3" name="firstName" class="textfield__input" required>
+                                    <label for="firstName3" class="textfield__label textfield__label--required">First Name</label>
+                                    <div id="firstName3Warning" class="warning" style="display: none;">Please enter First Name</div>
+
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="lastName3" name="lastName" class="textfield__input" required>
+                                    <label for="lastName3" class="textfield__label textfield__label--required">Last Name</label>
+                                    <div id="lastName3Warning" class="warning" style="display: none;">Please enter Last Name</div>
+
+                                </fieldset>
+                                <fieldset class="textfield textfield--light">
+                                    <input id="flightNumber3" name="flightNumber" class="textfield__input" required>
+                                    <label for="flightNumber3" class="textfield__label textfield__label--required">Flight Number</label>
+                                    <div id="flightNumber3Warning" class="warning" style="display: none;">Please enter Flight Number</div>
+
+                                </fieldset>
+                            </div>
+
+                            <div class="mt-5">
+
+                                <div class="mt-5" id="partnerPackage">
+                                    <!-- Dynamic content will be injected here -->
+                                </div>
+
+
+                                <div class="my-5">
+                                    <h5 class="voucherupgradeHeading">Upgrade</h5>
+                                    <div class="packageCardContainer" id="packageContainer3">
+                                        <!-- Package cards will be dynamically inserted here -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-5">
+                                <h5>Upload Document</h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(1)"
+                                                 data-type="passport">Passport <span class="text-danger">*</span></button>
+
+
+
+                                    </div>
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(2)"
+                                                 data-type="boarding-pass">Boarding Pass <span class="text-danger">*</span></button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="boardingPassCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button  class="walkinIdButton " onclick="openWebcamPopup(),changedoc(3)" data-type="id"
+                                                 disabled>Corporate ID</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="idCapturedImage"> -->
+                                    </div>
+                                    <div>
+                                        <button  class="PassportButton" onclick="openWebcamPopup(),changedoc(4)"
+                                                 data-type="other">Other</button>
+
+                                        <!-- <img src="" alt="Scanned Image" id="otherCapturedImage"> -->
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <h5>Balance Payment Method</h5>
+                                <div class="uploadDocumentDiv">
+                                    <div>
+                                        <button class="paymentButton1" value="cash" onclick="selectPayment(this, 'cash')" disabled>Cash</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Credit/Debit Card" onclick="selectPayment(this, 'Credit/Debit Card')" disabled>Credit/Debit Card</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Paypal" onclick="selectPayment(this, 'Paypal')"disabled>Paypal</button>
+                                    </div>
+                                    <div>
+                                        <button class="paymentButton1" value="Other" onclick="selectPayment(this, 'Other')"disabled>Other</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="mt-4">
+                                <button class="walkinSaveBtn" onclick="validateAndSubmitTab3()">Save & Print</button>
+                            </div>
+
+
+                            <div class="mt-5">
+                                <a href="#addGuestForm2" class="addGuestBtn" onclick="toggleAddGuestForm2()">
+                                    <img src="/images/WalkIn/add.png" alt="">
+                                    <p>Add Guest</p>
+                                </a>
+
+                                <!-- add guest tab -->
+                                <div id="addGuestForm2" style="display: none;">
+                                    <div class="inputBoxContainer mt-4">
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestfirstName3" name="guestfirstName2" class="textfield__input" required>
+                                            <label for="guestfirstName3" class="textfield__label textfield__label--required">First Name</label>
+                                            <div id="guestfirstName3Warning" class="warning" style="display: none;">Please enter your first name</div>
+                                        </fieldset>
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestlastName3" name="guestlastName2" class="textfield__input" required>
+                                            <label for="guestlastName3" class="textfield__label textfield__label--required">Last Name</label>
+                                            <div id="guestlastName3Warning" class="warning" style="display: none;">Please enter your last name</div>
+                                        </fieldset>
+                                        <fieldset class="textfield textfield--light">
+                                            <input id="guestflightNumber3" name="flightNumber2" class="textfield__input" required>
+                                            <label for="guestflightNumber3" class="textfield__label textfield__label--required">Flight Number</label>
+                                            <div id="guestflightNumber3Warning" class="warning" style="display: none;">Please enter your flight number</div>
+                                        </fieldset>
+                                    </div>
+
+
+
+                                    <div class="my-5">
+                                        <h5 class="voucherupgradeHeading">Packages</h5>
+                                        <div class="packageCardContainer" id="packageContainer4">
+                                            <!-- Package cards will be dynamically inserted here -->
+
+                                        </div>
+                                    </div>
+                                    <div class="mt-5">
+                                        <h5>Upload Document</h5>
+                                        <div class="uploadDocumentDiv">
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(1)" data-type="passport">Passport <span class="text-danger">*</span></button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(2)" data-type="boarding-pass">Boarding Pass <span class="text-danger">*</span></button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(3)" data-type="id">Corporate ID</button>
+                                            </div>
+                                            <div>
+                                                <button class="PassportButton" onclick="openWebcamPopup(),changedoc(4)" data-type="other">Other</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <h5>Balance Payment Method</h5>
+                                        <div class="uploadDocumentDiv">
+                                            <div>
+                                                <button class="paymentButton1" value="cash" onclick="selectPayment(this, 'cash')" >Cash</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Credit/Debit Card" onclick="selectPayment(this, 'Credit/Debit Card')" >Credit/Debit Card</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Paypal" onclick="selectPayment(this, 'Paypal')" >Paypal</button>
+                                            </div>
+                                            <div>
+                                                <button class="paymentButton1" value="Other" onclick="selectPayment(this, 'Other')" >Other</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mt-5">
+                                        <button class="walkinSaveBtn" onclick="guestvalidateAndSubmitTab3()">Save & Print</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <video id="videoElement" width="400" height="300" autoplay style="margin:auto"></video>
+        <br>
+        <button onclick="captureImage()" class="PassportButton my-2">Capture Image</button>
+        <button onclick="saveImage()" class="PassportButton my-2">Save Image</button>
+        <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
+        <img id="capturedImage" src="" style="display:none;">
+    </div>
+</div>
+
+<div id="popup" class="modal popup">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="print" >
+        <div  class="popup-content loungecard">
+            <h5 class="text-light">LOUNGE ACCESS CARD</h5>
+            <hr/>
+            <div class="loungeCardData">
+                <h5>Ticket Number - <span id="ticketNumberpop"></span></h5>
+                <div class="d-flex">
+                    <div class="col-lg-6 mx-4">
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">First Name</p>
+                            <h6 class="my-0 mt-1" id="firstNamepop"></h6>
+                        </div>
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">Flight Number</p>
+                            <h6 class="my-0 mt-1" id="flightNumberpop"></h6>
+                        </div>
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">Package</p>
+                            <h6 class="my-0 mt-1" id="packagepop"></h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">Last Name</p>
+                            <h6 class="my-0 mt-1" id="lastNamepop"></h6>
+                        </div>
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">Mode of Entry</p>
+                            <h6 class="my-0 mt-1" id="modeOfEntrypop"></h6>
+                        </div>
+                        <div class="mt-4">
+                            <p class="m-0 text-muted">Date</p>
+                            <h6 class="my-0 mt-1" id="datepop"></h6>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer p-0 m-0 border-0">
+                    <div class="loungeFooterLogo">
+                        <img src="images/Colourlogo.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <button onclick="printDiv()" class="btn printTicketBtn">Print</button>
+</div>
+</body>
+
+</html>
+
+
+<script>
+    console.log('check this value',document.getElementById("username").value);
+
+    var documenttype = 0;
+    function changedoc(a){
+        documenttype = a;
+    }
+    function toggleAddGuestForm() {
+        var addGuestForm = document.getElementById('addGuestForm');
+        if (addGuestForm.style.display === 'none' || addGuestForm.style.display === '') {
+            addGuestForm.style.display = 'block';
+        } else {
+            addGuestForm.style.display = 'none';
+        }
+    }
+
+    function toggleAddGuestForm2() {
+        var addGuestForm = document.getElementById('addGuestForm2');
+        if (addGuestForm.style.display === 'none' || addGuestForm.style.display === '') {
+            addGuestForm.style.display = 'block';
+        } else {
+            addGuestForm.style.display = 'none';
+        }
+    }
+    function printDiv() {
+        var printContents = document.querySelector("#print").innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        var printWindow = window.open('', '', 'height=400,width=600');
+        printWindow.document.write('<html><head><title>Print</title>');
+        // Add stylesheets
+        printWindow.document.write('<link rel="stylesheet" href="/walkin.css" type="text/css" />');
+        printWindow.document.write('<link rel="stylesheet" href="/loungeAccessCard.css" type="text/css" />');
+        printWindow.document.write(' <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">');
+
+        printWindow.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">');
+
+
+
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(printContents);
+        printWindow.document.write(
+            '</body></html>'
+        );
+
+        printWindow.document.close();
+
+    };
+
+
+    function fetchPackageDetails(packageId,discount) {
+        fetch(`/api/packages/details/${packageId}`)
+            .then(response => response.json())
+            .then(packageDetails => {
+                const discountedAmount = (packageDetails.amount) - (packageDetails.amount * discount / 100);
+                document.getElementById('voucherPackage').innerHTML = `
+            <div class="mt-5">
+                <h5>Voucher Package</h5>
+                <div class="packageCardContainer" id="voucherContainer${packageDetails.packageId}">
+                    <div class="row w-50">
+                        <div class="card packageCardBox">
+                            <div class="d-flex">
+                                <img src="${packageDetails.image}" class="packageImg" alt="Card Image">
+                                <div class="card-body">
+                                    <h4 class="packageHeading">${packageDetails.packageName}</h4>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/timeAccess.png" alt="" class="packageIcons">
+                                        <p>${packageDetails.times}</p>
+                                    </div>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/Validity.png" alt="" class="packageIcons">
+                                        <p> Valid for ${packageDetails.hour} Months</p>
+                                    </div>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/HourAccess.png" alt="" class="packageIcons">
+                                        <p>Limited for ${packageDetails.hour} hours access</p>
+                                    </div>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/Food.png" alt="" class="packageIcons">
+                                        <p>${packageDetails.snack ? 'Unlimited food and soft drinks' : 'No food provided'}</p>
+                                    </div>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/Harddrinks.png" alt="" class="packageIcons">
+                                        <p>${packageDetails.drinks}</p>
+                                    </div>
+                                    <div class="packageIconDiv">
+                                        <img src="/images/WalkIn/wifi.png" alt="" class="packageIcons">
+                                        <p>${packageDetails.wifi ? 'Unlimited Wi-Fi Access' : 'No Wi-Fi Access'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted d-flex align-items-center justify-content-between">
+
+                                 <div>
+                                        <p class="m-0">Price</p>
+                                        <p ><strike> USD ${packageDetails.amount}</strike></p>
+                                        <h4 class="pricePackage">Discounted Amount: ${discountedAmount.toFixed(2)}</h4>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+            })
+            .catch(error => console.error('Error fetching package details:', error));
+    }
+
+
+    var vId = 0;
+    var p2Id =0;
+    var pAmount;
+    var imagepath = "";
+    var imagepath2="";
+    var imagepath3="";
+    var imagepath4="";
+
+
+    var voucherNumber1 = "";
+    function fetchVoucherDetails() {
+        // Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        console.log(csrfToken);
+        console.log(csrfHeader);
+        // Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+        // Create headers object
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append(csrfHeader, csrfToken);
+        const voucherNumber = document.getElementById('voucherIdInput').value.trim();
+
+        if (voucherNumber) {
+            fetch(`/api/code/redeem?code=${voucherNumber}`)
+                .then(response => {
+                    if (!response.ok) {
+                        // If the response status is not OK (e.g., 400, 500), handle the error
+                        return response.json().then(errorData => {
+                            throw new Error(errorData.message);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data) {
+                        var d = data.discount;
+                        fetchPackageDetails(data.packageId , d);
+
+                        document.getElementById('clientName').value = data.clientName;
+
+
+                        vId = data.voucherId;
+                        p2Id = data.packageId;
+                        pAmount = data.amount;
+
+
+
+
+
+                        populateUpgradePackages(data.amount, +d);
+                    }
+                    console.log(data);
+                    voucherNumber1=voucherNumber;
+                })
+                .catch(error => {
+                    // Show an alert with the error message and stop further processing
+                    alert(`Error: ${error.message}`);
+                    console.error('Error fetching voucher details:', error);
+                });
+        } else {
+            document.getElementById('voucherIdInputWarning').style.display = 'block';
+        }
+
+    }
+    function validateAndSubmitTab2() {
+        // Reset warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.style.display = 'none';
+        });
+
+        // Check if required fields are empty
+        const voucherIdInput = document.getElementById('voucherIdInput').value.trim();
+        const clientName = document.getElementById('clientName').value.trim();
+        const firstName2 = document.getElementById('firstName2').value.trim();
+        const lastName2 = document.getElementById('lastName2').value.trim();
+        const flightNumber2 = document.getElementById('flightNumber2').value.trim();
+
+        let isValid = true;
+
+        if (voucherIdInput === '') {
+            document.getElementById('voucherIdInputWarning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (clientName === '') {
+            document.getElementById('clientNameWarning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (firstName2 === '') {
+            document.getElementById('firstName2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (lastName2 === '') {
+            document.getElementById('lastName2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (flightNumber2 === '') {
+            document.getElementById('flightNumber2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        // If all required fields are filled, submit the form
+        if (isValid) {
+            showCongratulations2(voucherIdInput); // Just for demonstration, replace with your form submission code
+        }
+    }
+    function guestvalidateAndSubmitTab2() {
+        // Reset warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.style.display = 'none';
+        });
+
+        // Check if required fields are empty
+
+
+        const firstName2 = document.getElementById('guestfirstName2').value.trim();
+        const lastName2 = document.getElementById('guestlastName2').value.trim();
+        const flightNumber2 = document.getElementById('guestflightNumber2').value.trim();
+
+        let isValid = true;
+
+
+
+        if (firstName2 === '') {
+            document.getElementById('guestfirstName2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (lastName2 === '') {
+            document.getElementById('guestlastName2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (flightNumber2 === '') {
+            document.getElementById('guestflightNumber2Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        // If all required fields are filled, submit the form
+        if (isValid) {
+            guestshowCongratulations(); // Just for demonstration, replace with your form submission code
+        }
+    }
+
+    function guestvalidateAndSubmitTab3() {
+        // Reset warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.style.display = 'none';
+        });
+
+        // Check if required fields are empty
+
+
+        const firstName2 = document.getElementById('guestfirstName3').value.trim();
+        const lastName2 = document.getElementById('guestfirstName3').value.trim();
+        const flightNumber2 = document.getElementById('guestflightNumber3').value.trim();
+
+        let isValid = true;
+
+
+
+        if (firstName2 === '') {
+            document.getElementById('guestfirstName3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (lastName2 === '') {
+            document.getElementById('guestlastName3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (flightNumber2 === '') {
+            document.getElementById('guestflightNumber3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        // If all required fields are filled, submit the form
+        if (isValid) {
+            guestshowCongratulations2(); // Just for demonstration, replace with your form submission code
+        }
+    }
+
+
+    var paymentType2 = "Not Required";
+
+    function selectPaymentWalkin(button, paymentMethod) {
+        // Remove 'selectedbtncolor' class from all buttons
+        document.querySelectorAll('.paymentButtonWalkin').forEach(btn => {
+            btn.classList.remove('selectedbtncolor');
+        });
+
+        // Add 'selectedbtncolor' class to the clicked button
+        button.classList.add('selectedbtncolor');
+        paymentType2 =paymentMethod
+        // Console log the selected payment method
+        console.log('Selected payment method:', paymentMethod);
+    }
+    function selectPayment(button, paymentMethod) {
+        // Remove 'selectedbtncolor' class from all buttons
+        document.querySelectorAll('.paymentButton1').forEach(btn => {
+            btn.classList.remove('selectedbtncolor');
+        });
+
+        // Add 'selectedbtncolor' class to the clicked button
+        button.classList.add('selectedbtncolor');
+        paymentType2 =paymentMethod
+        // Console log the selected payment method
+        console.log('Selected payment method:', paymentMethod);
+    }
+    function validateAndSubmit() {
+        // Reset warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.style.display = 'none';
+        });
+
+        // Check if required fields are empty
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const flightNumber = document.getElementById('flightNumber').value.trim();
+
+        let isValid = true;
+
+        if (firstName === '') {
+            document.getElementById('firstNameWarning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (lastName === '') {
+            document.getElementById('lastNameWarning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (flightNumber === '') {
+            document.getElementById('flightNumberWarning').style.display = 'block';
+            isValid = false;
+        }
+        if( imagepath == "" || imagepath2==""){
+            alert("Please Upload both the documents");
+            return;
+        }
+
+        // If all required fields are filled, submit the form
+        if (isValid) {
+            // Your code to submit the form goes here
+            showCongratulations(); // Just for demonstration, replace with your form submission code
+        }
+    }
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+    const dateButton = document.getElementById('dateButton');
+    dateButton.textContent = today.toLocaleDateString('en-CA');
+
+
+
+    // Add event listener to tabs
+    var selectedTabText = "Walkin";
+
+    var tabs = document.querySelectorAll('.nav-link');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            // Get the text content of the selected tab
+            selectedTabText = tab.querySelector('.tab-text').textContent;
+            // Console log the selected tab text
+            console.log(selectedTabText);
+        });
+    });
+
+
+
+    var paymenttype = null;
+    function logPaymentMethod(method, button) {
+        // Reset styles of all buttons
+        const allButtons = document.querySelectorAll('.nav-link');
+        allButtons.forEach(btn => {
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+        });
+
+        // Change style of the clicked button
+        button.style.backgroundColor = "#144463";
+        button.style.color = "white";
+        paymenttype = method;
+        console.log(method);
+    }
+
+    // Function to create package card HTML
+    function createPackageCard(package) {
+        return `
+        <div class="row w-50">
+            <div class="card packageCardBox">
+                <div class="d-flex">
+                    <img src="${package.image}" class="packageImg" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="packageHeading">${package.packageName}</h4>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/timeAccess.png" alt="" class="packageIcons">
+                            <p>${package.times} time access allowed</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Validity.png" alt="" class="packageIcons">
+                            <p> Valid for ${package.hour} Months</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/HourAccess.png" alt="" class="packageIcons">
+                            <p>Limited for ${package.hour} hours access</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Food.png" alt="" class="packageIcons">
+                            <p> ${package.snack ? 'Unlimited food and soft drinks' : 'No food provided'}</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Harddrinks.png" alt="" class="packageIcons">
+                            <p>${package.drinks === '' ? 'No Hard Drinks' : 'Limited Hard Drinks'}</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/wifi.png" alt="" class="packageIcons">
+                            <p> ${package.wifi ? 'Unlimited Wi-Fi Access' : 'No Wi-Fi Access'}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex align-items-center justify-content-between">
+                    <div>
+                        <p class="m-0">Price</p>
+                        <h4 class="pricePackage">USD ${package.amount}</h4>
+                    </div>
+                    <button class="packageSelectBtn" onclick="myFunction('${package.packageId}', this, ${package.amount})">Select</button>
+                </div>
+            </div>
+        </div>
+
+    `;
+    }
+    function createPackageCard2(package , discount, a2) {
+        console.log(discount);
+        const discountedAmount = (package.amount-a2) - ((package.amount-a2) * discount / 100);
+        return `
+        <div class="row w-50">
+            <div class="card packageCardBox">
+                <div class="d-flex">
+                    <img src="${package.image}" class="packageImg" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="packageHeading">${package.packageName}</h4>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/timeAccess.png" alt="" class="packageIcons">
+                            <p>${package.times} time access allowed</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Validity.png" alt="" class="packageIcons">
+                            <p> Valid for ${package.hour} Months</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/HourAccess.png" alt="" class="packageIcons">
+                            <p>Limited for ${package.hour} hours access</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Food.png" alt="" class="packageIcons">
+                            <p> Unlimited food and soft drinks</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Harddrinks.png" alt="" class="packageIcons">
+                            <p>${package.drinks === 'true' ? 'Limited Hard Drinks' : 'No Hard Drinks'}</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/wifi.png" alt="" class="packageIcons">
+                            <p> Unlimited Wi-Fi Access</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex align-items-center justify-content-between">
+                    <div>
+                        <p class="m-0">Price</p>
+                        <p ><strike> USD ${package.amount}</strike></p>
+                        <h4 class="pricePackage">Discounted Amount: ${discountedAmount.toFixed(2)}</h4>
+                    </div>
+                    <button class="packageSelectBtn" onclick="selectPackage(${package.packageId}), myFunction2('${package.packageId}', this ,${discountedAmount.toFixed(2)} )">Select</button>
+                </div>
+            </div>
+        </div>
+    `;
+    }
+
+    var packageId = 1;
+    var pAmount2 =0;
+    function myFunction(packageId1, button, amount) {
+        pAmount2 = amount;
+        console.log(packageId1);
+        packageId= packageId1;
+        // Reset styles of all buttons
+        const allButtons = document.querySelectorAll('.packageSelectBtn');
+        allButtons.forEach(btn => {
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+        });
+
+        // Change style of the clicked button
+        button.style.backgroundColor = "#144463";
+        button.style.color = "white";
+    }
+    function myFunction2(packageId1, button, amount) {
+        pAmount=amount;
+        console.log(pAmount+ "pAmount");
+        console.log(packageId1);
+        packageId= packageId1;
+        // Reset styles of all buttons
+        const allButtons = document.querySelectorAll('.packageSelectBtn');
+        allButtons.forEach(btn => {
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+        });
+
+        // Change style of the clicked button
+        button.style.backgroundColor = "#144463";
+        button.style.color = "white";
+    }
+
+
+
+    // data is fetching with the ajax
+    $(document).ready(function () {
+        $.ajax({
+            url: "/api/packages/getAllPackages",
+            type: "GET",
+            success: function (data) {
+                var options = '<option value="">Select Package</option>';
+                data.forEach(function (package) {
+                    options += '<option value="' + package.packageId + '">' + package.packageName + '</option>';
+                });
+                $('#packageId').html(options);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+
+
+
+
+
+
+    // Fetch package data from the API
+    fetch('/api/packages/getAllPackages')
+        .then(response => response.json())
+        .then(data => {
+            const packageContainer = document.getElementById('packageContainer');
+
+            console.log(data);
+            // Filter the package data to include only those with a status flag set to true
+            const filteredData = data.filter(package => package.flag === true);
+            // Loop through the filtered package data and create HTML for each package card
+            filteredData.forEach(package => {
+                packageContainer.innerHTML += createPackageCard(package);
+
+            });
+        })
+        .catch(error => console.error('Error fetching package data:', error));
+
+
+
+    function fetchAllPackages(voucherAmount ,d) {
+        console.log("insdefetch: "+ voucherAmount);
+        fetch('/api/packages/getAllPackages')
+            .then(response => response.json())
+            .then(data => {
+
+                const packageContainer = document.getElementById('packageContainer2');
+                const  guestPackageContainer = document.getElementById('guestpackageContainer')
+
+                console.log(data);
+
+                // Filter the data where package amount is greater than myamount
+                const filteredData = data.filter(pkg => pkg.amount > voucherAmount && pkg.flag);
+                const filteredData2 = data.filter(pkg => pkg.flag);
+                console.log(filteredData);
+                console.log(voucherAmount);
+                // Loop through the filtered data and create HTML for each package card
+                filteredData.forEach(pkg => {
+                    packageContainer.innerHTML += createPackageCard2(pkg,d,voucherAmount);
+
+
+                });
+                filteredData2.forEach(pkg => {
+
+                    guestPackageContainer.innerHTML += createPackageCard2(pkg,d,0);
+
+
+                });
+            })
+            .catch(error => console.error('Error fetching package data:', error));
+    }
+
+
+    function populateUpgradePackages(voucherAmount, d) {
+        fetchAllPackages(voucherAmount, d);
+    }
+
+    function selectPackage(button) {
+        // Enable payment buttons when a package is selected
+        document.querySelectorAll('.paymentButton1').forEach(btn => {
+            btn.disabled = false;
+            btn.style.backgroundColor = "white";
+            btn.style.color = "#144463";
+            btn.style.border=" 2px solid #144463";
+        });
+
+        // Rest of the selection logic
+        const allButtons = document.querySelectorAll('.packageSelectBtn');
+        allButtons.forEach(btn => {
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+        });
+
+        /* button.style.backgroundColor = "#144463";
+         button.style.color = "white";*/
+    }
+    function showCongratulations() {
+        var formData = {
+            ticketType: selectedTabText,
+            flightNumber: $('#flightNumber').val(),
+            firstName: $('#firstName').val(),
+            lastName: $('#lastName').val(),
+            doc: imagepath,
+            doc2: imagepath2,
+            doc3: imagepath3,
+            doc4: imagepath4,
+            paymentMethod: paymentType2,
+            date: today,
+            // packageId: $('#packageId').val()
+            packageDetails: {packageId : packageId},
+            amount: pAmount2,
+            createdBy: document.getElementById("username").value
+        };
+        saveTicket(formData);
+
+    }
+
+    function showCongratulations2(voucherIdInput) {
+
+        var formData = {
+            ticketType: selectedTabText,
+            pnr: $('#pnr').val(),
+            sequence: $('#sequence').val(),
+            airlineName: $('#airlineName').val(),
+            flightNumber: $('#flightNumber2').val(),
+            firstName: $('#firstName2').val(),
+            lastName: $('#lastName2').val(),
+            doc: imagepath,
+            doc2: imagepath2,
+            doc3: imagepath3,
+            doc4: imagepath4,
+            paymentMethod: paymentType2,
+            voucher:{
+                voucherId: vId
+            },
+            date: today,
+            // packageId: $('#packageId').val()
+            packageDetails: {packageId : p2Id},
+            amount: pAmount,
+            voucherCode : voucherIdInput,
+            createdBy: document.getElementById("username").value
+        };
+
+
+        saveTicket(formData)
+
+        // Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        console.log(csrfToken);
+        console.log(csrfHeader);
+        // Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+        // Create headers object
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append(csrfHeader, csrfToken);
+        fetch(`/api/code/redeemed?code=${voucherNumber1}`)
+            .then(response => {
+                if (!response.ok) {
+
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.message);
+                    });
+                }
+                return response;
+            })
+
+            .catch(error => {
+                // Show an alert with the error message and stop further processing
+                alert(`Error: ${error.message}`);
+                console.error('Error fetching voucher details:', error);
+            });
+
+    }
+    /*function saveTicket(formData){
+        // Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        // Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+        // Create headers object
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append(csrfHeader, csrfToken);
+
+        console.log(formData);
+        $.ajax({
+            url: "/api/ticket/addTicket",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            headers: headers, // Include CSRF token in the headers
+            success: function(response) {
+                console.log("Ticket added:", response);
+                // Handle success
+                alert('Congratulations! Your data has been saved and printed.');
+                let modal = document.getElementById('popup');
+                modal.style.display = 'block';
+                ticketData(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert("Something went wrong try again");
+                return;
+
+                // Handle error
+            }
+        });
+    }*/
+    function saveTicket(formData) {
+        // Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        // Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+        // Create headers object
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append(csrfHeader, csrfToken);
+
+        console.log(formData);
+
+        // Send an HTTP POST request to the server using fetch
+        fetch("/api/ticket/addTicket", {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Ticket added:", data);
+                // Handle success
+                alert('Congratulations! Your data has been saved and printed.');
+                let modal = document.getElementById('popup');
+                modal.style.display = 'block';
+                ticketData(data);
+            })
+            .catch(error => {
+                console.error('Error adding ticket:', error);
+                alert("Something went wrong. Please try again.");
+            });
+    }
+
+    function guestshowCongratulations() {
+        var formData = {
+            ticketType: "Voucher Guest",
+            pnr: $('#pnr').val(),
+            sequence: $('#sequence').val(),
+            airlineName: $('#airlineName').val(),
+            flightNumber: $('#guestflightNumber2').val(),
+            firstName: $('#guestfirstName2').val(),
+            lastName: $('#guestlastName2').val(),
+
+            doc: imagepath,
+            doc2: imagepath2,
+            doc3: imagepath3,
+            doc4: imagepath4,
+            paymentMethod: paymentType2,
+            voucher:{
+                voucherId: vId
+            },
+            date: today,
+            // packageId: $('#packageId').val()
+            packageDetails: {packageId : p2Id},
+            amount: pAmount,
+            createdBy: document.getElementById("username").value
+        };
+
+        console.log(formData);
+
+        saveTicket(formData);
+
+
+    }
+    function guestshowCongratulations2() {
+        /* var formData = {
+             ticketType: "Partner Guest",
+             pnr: $('#pnr').val(),
+             sequence: $('#sequence').val(),
+             airlineName: $('#airlineName').val(),
+
+
+             doc: imagepath,
+             paymentMethod: paymentType2,
+
+             date: today,
+             // packageId: $('#packageId').val()
+             /!*packageDetails: {packageId : p2Id},*!/
+             amount: pAmount
+         };*/
+        var formData = {
+            ticketType: "Partner Guest",
+            sequence: $('#sequence').val(),
+            airlineName: $('#airlineSelect').val(),
+            flightNumber: $('#guestflightNumber3').val(),
+            firstName: $('#guestfirstName3').val(),
+            lastName: $('#guestlastName3').val(),
+            partners:{partnerId :$('#partnerSelect').val() },
+            doc: imagepath,
+            doc2: imagepath2,
+            doc3: imagepath3,
+            doc4: imagepath4,
+            paymentMethod: paymentType2,
+            voucherId: $('#voucherId').val(),
+            date: today,
+            // packageId: $('#packageId').val()
+            packageDetails: {packageId : packageId},
+            amount: pAmount,
+            createdBy: document.getElementById("username").value
+        };
+
+        console.log(formData);
+
+        saveTicket(formData);
+
+
+    }
+    let videoInitialized = false; // Flag to track if the video has been initialized
+
+    function initializeVideo() {
+        if (!videoInitialized) {
+            let video = document.getElementById('videoElement');
+            let constraints = { video: { facingMode: "user" }, audio: false };
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                console.error('getUserMedia is not supported in this browser.');
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function(mediaStream) {
+                    video.srcObject = mediaStream;
+                    video.onloadedmetadata = function(e) {
+                        video.play();
+                    };
+                })
+                .catch(function(err) {
+                    console.error(err.name + ": " + err.message);
+                });
+
+            videoInitialized = true;
+        }
+    }
+
+    function openWebcamPopup() {
+        initializeVideo(); // Ensure video is initialized when opening popup
+        let modal = document.getElementById('modal');
+        modal.style.display = 'block';
+    }
+
+    function captureImage() {
+        let canvas = document.getElementById('canvas');
+        let capturedImage = document.getElementById('capturedImage');
+        let video = document.getElementById('videoElement');
+        let ctx = canvas.getContext('2d');
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        capturedImage.src = canvas.toDataURL('image/png');
+        capturedImage.style.display = 'inline';
+        canvas.style.display = 'none';
+    }
+
+    function retakeImage() {
+        let capturedImage = document.getElementById('capturedImage');
+        let canvas = document.getElementById('canvas');
+
+        capturedImage.style.display = 'none';
+        canvas.style.display = 'inline';
+    }
+
+    function saveImage() {
+        let canvas = document.getElementById('canvas');
+        let capturedImage = document.getElementById('capturedImage');
+
+// Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+// Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+// Convert the canvas image to a blob
+        canvas.toBlob(function(blob) {
+            // Create a FormData object to send data to the server
+            let formData = new FormData();
+            formData.append('file', blob, 'webcam_capture.png'); // 'file' is the name of the parameter expected by the API
+
+            // Create headers object
+            const headers = new Headers();
+            headers.append(csrfHeader, csrfToken); // Include CSRF token in the headers
+
+            // Send an HTTP POST request to the server
+            fetch('/api/file/upload', {
+                method: 'POST',
+                headers: headers,
+                body: formData
+            })
+                .then(response => response.text())
+                .then(filePath => {
+                    console.log('File uploaded successfully. Path:', filePath);
+                    if(documenttype == 1){
+                        imagepath = filePath;
+                    }else if(documenttype == 2){
+                        imagepath2 = filePath;
+                    }else if(documenttype == 3){
+                        imagepath3 = filePath;
+                    }else if(documenttype == 4){
+                        imagepath4 = filePath;
+                    }
+
+                    alert("Document saved!")
+                    // Optionally, you can display a message to the user indicating successful upload
+                })
+                .catch(error => {
+                    console.error('Error uploading file:', error);
+                    // Optionally, you can display an error message to the user
+                });
+        }, 'image/png');
+    }
+
+
+    function closeModal() {
+        let modal = document.getElementById('modal');
+        modal.style.display = 'none';
+        document.getElementById("popup").style.display = "none";
+
+        // Stop the video stream
+        let video = document.getElementById('videoElement');
+        if (video.srcObject) {
+            let stream = video.srcObject;
+            let tracks = stream.getTracks();
+
+            tracks.forEach(function(track) {
+                track.stop();
+            });
+
+            video.srcObject = null;
+        }
+
+        videoInitialized = false; // Reset the flag when closing the modal
+    }
+    function ticketData(formDatapop) {
+        // Sample data, replace with your form data
+
+        console.log(formDatapop);
+
+        document.getElementById('ticketNumberpop').textContent = formDatapop.ticketId;
+        document.getElementById('firstNamepop').textContent = formDatapop.firstName;
+        document.getElementById('lastNamepop').textContent = formDatapop.lastName;
+        document.getElementById('flightNumberpop').textContent = formDatapop.flightNumber;
+        document.getElementById('packagepop').textContent = formDatapop.packageDetails.packageId;
+        document.getElementById('modeOfEntrypop').textContent = formDatapop.ticketType;
+        document.getElementById('datepop').textContent = new Date(formDatapop.date).toLocaleDateString('en-GB', {
+            weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit'
+        });
+
+        popup.style.display = 'block';
+    };
+
+
+    // tab 3 script
+    var d2 = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/partners/getAll')
+            .then(response => response.json())
+            .then(data => {
+                const airlineSelect = document.getElementById('airlineSelect');
+                const partnerSelect = document.getElementById('partnerSelect');
+                const partnerSearch = document.getElementById('partnerSearch');
+
+                airlineSelect.innerHTML = ''; // Clear existing options
+                partnerSelect.innerHTML = ''; // Clear existing options
+
+                const partnerTypes = new Set();
+                const partnersMap = {};
+
+                data.forEach(partner => {
+                    // Collect unique partner types for airlineSelect
+                    partnerTypes.add(partner.partnerType);
+
+                    // Group partners by type
+                    if (!partnersMap[partner.partnerType]) {
+                        partnersMap[partner.partnerType] = [];
+                    }
+                    partnersMap[partner.partnerType].push(partner);
+                });
+
+                partnerTypes.forEach(type => {
+                    const typeOption = document.createElement('option');
+                    typeOption.value = type;
+                    typeOption.textContent = type;
+                    airlineSelect.appendChild(typeOption);
+                });
+
+                airlineSelect.addEventListener('change', function() {
+                    const selectedType = airlineSelect.value;
+                    partnerSelect.innerHTML = ''; // Clear existing options
+
+                    const partnerOption = document.createElement('option');
+                    partnerOption.value = null;
+                    partnerOption.textContent = "Partner Name";
+                    partnerSelect.appendChild(partnerOption);
+
+                    if (partnersMap[selectedType]) {
+                        partnersMap[selectedType].forEach(partner => {
+                            const partnerOption = document.createElement('option');
+                            partnerOption.value = partner.partnerId;
+                            partnerOption.textContent = partner.partnerName;
+                            partnerSelect.appendChild(partnerOption);
+                        });
+
+                        partnerSearch.style.display = 'block'; // Show search input
+                        partnerSearch.value = ''; // Clear search input
+                    } else {
+                        partnerSearch.style.display = 'none'; // Hide search input if no partners
+                    }
+                });
+
+                partnerSelect.addEventListener('change', function() {
+                    const selectedPartnerId = partnerSelect.value;
+                    var partnerDiscount = 0;
+                    fetch(`/api/partners/getDetails?id=${selectedPartnerId}`)
+                        .then(response => response.json())
+                        .then(partnerDetails => {
+                            console.log(partnerDetails);
+                            // Log partner discount to console
+                            console.log('Selected partner discount:', partnerDetails.discount);
+                            partnerDiscount= partnerDetails.discount;
+                            fetchPackageDetails2(selectedPartnerId,partnerDetails.discount);
+                        })
+                        .catch(error => console.error('Error fetching partner details:', error));
+                    debugger;
+                    /*fetchPackageDetails2(selectedPartnerId,partnerDiscount);*/
+                });
+
+                // Event listener for partner search
+                partnerSearch.addEventListener('input', function() {
+                    const filter = partnerSearch.value.toLowerCase();
+                    const options = partnerSelect.options;
+
+                    for (let i = 1; i < options.length; i++) { // Start from 1 to skip the first "Partner Name" option
+                        const option = options[i];
+                        const text = option.textContent.toLowerCase();
+                        option.style.display = text.includes(filter) ? '' : 'none';
+                    }
+                });
+
+                // Trigger change event to populate initial partnerSelect options
+                airlineSelect.dispatchEvent(new Event('change'));
+            })
+            .catch(error => console.error('Error fetching partners:', error));
+    });
+
+
+
+    function fetchPackageDetails2(partnerId, partnerDiscount) {
+
+        console.log(partnerDiscount);
+        console.log(partnerId);
+        fetch(`/api/packages/byPartner/${partnerId}`)
+            .then(response => response.json())
+            .then(packages => {
+                let amount = 0;
+                if (packages.length > 0) {
+                    amount = packages[0].amount;
+
+                }
+                pAmount = amount;
+                populateUpgradePackages2(amount, partnerDiscount);
+                const discountedAmount = (amount) - (amount * partnerDiscount / 100);
+                const partnerPackageDiv = document.getElementById('partnerPackage');
+                partnerPackageDiv.innerHTML = '';
+                partnerPackageDiv.innerHTML = packages.map(packageDetails => `
+                        <div class="mt-5">
+                            <h5>Partner Package</h5>
+                            <div class="packageCardContainer" id="packageContainer${packageDetails.packageId}">
+                                <div class="row w-50">
+                                    <div class="card packageCardBox">
+                                        <div class="d-flex">
+                                            <img src="${packageDetails.image}" class="packageImg" alt="Card Image">
+                                            <div class="card-body">
+                                                <h4 class="packageHeading">${packageDetails.packageName}</h4>
+                                                <div class="packageIconDiv">
+                                                    <img src="/images/WalkIn/timeAccess.png" alt="" class="packageIcons">
+                                                    <p>${packageDetails.times}</p>
+                                                </div>
+
+                                                <div class="packageIconDiv">
+                                                    <img src="/images/WalkIn/HourAccess.png" alt="" class="packageIcons">
+                                                    <p>Limited for ${packageDetails.hour} hours access</p>
+                                                </div>
+                                                <div class="packageIconDiv">
+                                                    <img src="/images/WalkIn/Food.png" alt="" class="packageIcons">
+                                                    <p>${packageDetails.snack ? 'Unlimited food and soft drinks' : 'No food provided'}</p>
+                                                </div>
+                                                <div class="packageIconDiv">
+                                                    <img src="/images/WalkIn/Harddrinks.png" alt="" class="packageIcons">
+                                                    <p>${packageDetails.drinks}</p>
+                                                </div>
+                                                <div class="packageIconDiv">
+                                                    <img src="/images/WalkIn/wifi.png" alt="" class="packageIcons">
+                                                    <p>${packageDetails.wifi ? 'Unlimited Wi-Fi Access' : 'No Wi-Fi Access'}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="m-0">Price</p>
+                                                <p ><strike> USD ${packageDetails.amount}</strike></p>
+                                                <h4 class="pricePackage">Discounted Amount: ${discountedAmount.toFixed(2)}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+            })
+            .catch(error => console.error('Error fetching package details:', error));
+    }
+    function populateUpgradePackages2(voucherAmount, d) {
+
+        console.log(d);
+        fetchAllPackages2(voucherAmount, d);
+    }
+
+    function fetchAllPackages2(voucherAmount ,d) {
+
+        console.log(d);
+        console.log("insdefetch: "+ voucherAmount);
+        fetch('/api/packages/getAllPackages')
+            .then(response => response.json())
+            .then(data => {
+                const packageContainer = document.getElementById('packageContainer3');
+                const guestPackageContainer2 = document.getElementById('packageContainer4');
+
+                console.log(guestPackageContainer2);
+                console.log(packageContainer);
+                console.log(data);
+                console.log("partner discount: "+d);
+
+                // Filter the data where package amount is greater than myamount
+                const filteredData = data.filter(pkg => pkg.amount > voucherAmount  && pkg.flag);
+                const filteredData2 = data.filter(pkg => pkg.flag);
+                console.log(filteredData);
+                console.log(voucherAmount);
+                // Loop through the filtered data and create HTML for each package card
+                filteredData.forEach(pkg => {
+                    packageContainer.innerHTML += createPackageCard2(pkg,d,voucherAmount);
+                });
+                filteredData2.forEach(pkg => {
+                    guestPackageContainer2.innerHTML += createPackageCard2(pkg,d,0);
+                });
+            })
+            .catch(error => console.error('Error fetching package data:', error));
+    }
+    function validateAndSubmitTab3() {
+        // Reset warnings
+        document.querySelectorAll('.warning').forEach(warning => {
+            warning.style.display = 'none';
+        });
+
+        // Check if required fields are empty
+        const airlineSelect = document.getElementById('airlineSelect').value.trim();
+        const partnerSelect = document.getElementById('partnerSelect').value.trim();
+        const sequence = document.getElementById('sequence').value.trim();
+        const firstName3 = document.getElementById('firstName3').value.trim();
+        const lastName3 = document.getElementById('lastName3').value.trim();
+        const flightNumber3 = document.getElementById('flightNumber3').value.trim();
+
+        let isValid = true;
+
+
+
+        if (sequence === '') {
+            document.getElementById('sequenceWarning').style.display = 'block';
+            isValid = false;
+        }
+
+
+
+        if (firstName3 === '') {
+            document.getElementById('firstName3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (lastName3 === '') {
+            document.getElementById('lastName3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        if (flightNumber3 === '') {
+            document.getElementById('flightNumber3Warning').style.display = 'block';
+            isValid = false;
+        }
+
+        // If all required fields are filled, submit the form
+        if (isValid) {
+            showCongratulations3(); // Just for demonstration, replace with your form submission code
+        }
+    }
+
+
+    function showCongratulations3() {
+        var formData = {
+            ticketType: selectedTabText,
+            sequence: $('#sequence').val(),
+            airlineName: $('#airlineSelect').val(),
+            flightNumber: $('#flightNumber3').val(),
+            firstName: $('#firstName3').val(),
+            lastName: $('#lastName3').val(),
+            partners:{partnerId :$('#partnerSelect').val() },
+            doc: imagepath,
+            doc2: imagepath2,
+            doc3: imagepath3,
+            doc4: imagepath4,
+            paymentMethod: paymentType2,
+            voucherId: $('#voucherId').val(),
+            date: today,
+            // packageId: $('#packageId').val()
+            packageDetails: {packageId : packageId},
+            amount: pAmount,
+            createdBy: document.getElementById("username").value
+        };
+        console.log(formData);
+        saveTicket(formData);
+
+    }
+</script>
+<style>
+
+</style>

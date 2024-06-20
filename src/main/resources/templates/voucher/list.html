@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Vouchers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #vouchersList {
+            margin-top: 20px;
+        }
+
+        .deleteButton, .updateButton {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .deleteButton:hover, .updateButton:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+<h1>All Vouchers</h1>
+<div id="vouchersList"></div>
+
+<script>
+    fetch('/voucher/getAll')
+        .then(response => response.json())
+        .then(vouchers => {
+            fetchPackageNames(vouchers);
+        })
+        .catch(error => console.error('Error fetching vouchers:', error));
+
+    function fetchPackageNames(vouchers) {
+        Promise.all(vouchers.map(voucher => {
+            return fetch('/packages/details/' + voucher.packageDetails.packageId)
+                .then(response => response.json())
+                .then(packageData => {
+                    voucher.packageName = packageData.packageName;
+                    return voucher;
+                });
+        })).then(vouchersWithPackageNames => {
+            displayVouchers(vouchersWithPackageNames);
+        });
+    }
+
+    function displayVouchers(vouchers) {
+        var vouchersList = document.getElementById('vouchersList');
+
+        if (vouchers.length === 0) {
+            vouchersList.innerHTML = '<p>No vouchers found.</p>';
+        } else {
+            var html = '<table>';
+            html += '<tr><th>Voucher ID</th><th>Voucher Name</th><th>Package Name</th><th>Client Name</th><th>Email</th><th>No of Vouchers</th><th>Issue Date</th><th>Valid Date</th><th>Payment Type</th><th>Amount</th><th>Prepared By</th><th>Action</th></tr>';
+            vouchers.forEach(voucher => {
+                html += '<tr>';
+                html += '<td>' + voucher.voucherId + '</td>';
+                html += '<td>' + voucher.voucherName + '</td>';
+                html += '<td>' + voucher.packageName + '</td>';
+                html += '<td>' + (voucher.client ? voucher.client.clientName : 'N/A') + '</td>';
+                html += '<td>' + voucher.email + '</td>';
+                html += '<td>' + voucher.noOfVouchers + '</td>';
+                html += '<td>' + voucher.issueDate + '</td>';
+                html += '<td>' + voucher.validDate + '</td>';
+                html += '<td>' + voucher.paymentType + '</td>';
+                html += '<td>' + voucher.amount + '</td>';
+                html += '<td>' + voucher.preparedBy + '</td>';
+                html += '<td><button class="deleteButton" onclick="deleteVoucher(' + voucher.voucherId + ')">Delete</button> <button class="updateButton" onclick="updateVoucher(' + voucher.voucherId + ')">Update</button></td>';
+                html += '</tr>';
+            });
+            html += '</table>';
+            vouchersList.innerHTML = html;
+        }
+    }
+
+    function deleteVoucher(voucherId) {
+        if (confirm('Are you sure you want to delete this voucher?')) {
+            fetch('/voucher/delete?voucherID=' + voucherId, {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Optionally, you can update the UI or show a success message
+                    // For simplicity, let's reload the page to reflect changes
+                    location.reload();
+                })
+                .catch(error => console.error('Error deleting voucher:', error));
+        }
+    }
+
+    function updateVoucher(voucherId) {
+        window.location.href = '/voucher/update/update-voucher?id=' + voucherId;
+    }
+</script>
+
+</body>
+</html>

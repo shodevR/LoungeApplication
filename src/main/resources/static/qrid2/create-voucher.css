@@ -1,0 +1,284 @@
+.tabContainer1 > li > a {
+    text-decoration: none;
+    color: black;
+}
+.tabContainer1 > li > a > button{
+    width: 100%;
+    margin: none;
+    padding: 15px;
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.tabContainer1 > li > a > button > div{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding-left: 15px;
+}
+.tabContainer1 > li > a > button > div >img{
+    height: 20px;
+    margin-top: 1%;
+}
+.tabContainer1 > li > a > button > div > span{
+    margin-left: 25px;
+}
+.packageInputBoxContainers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 97%;
+    margin: auto;
+    margin-top: 2%;
+    height: 60px;
+}
+.packageInputBoxContainers>input{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+/ background-color: white; /
+}
+.clientSelect{
+    width: 25% !important;
+    -webkit-appearance: none;
+-moz-appearance: none;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.094 2.446"><path fill="%23000" d="M2.047 2.446L0 0h4.094z"/></svg>') no-repeat right 30px center;
+    background-color: white;
+background-size: 12px;
+}
+.arrowspace{
+    -webkit-appearance: none;
+-moz-appearance: none;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.094 2.446"><path fill="%23000" d="M2.047 2.446L0 0h4.094z"/></svg>') no-repeat right 30px center;
+    background-color: white;
+background-size: 12px;
+}
+.addClient{
+    height: 56px;
+    color: #144463;
+    font-size: 45px;
+    cursor: pointer;
+}
+.addClient>img{
+    vertical-align: top;
+    height: 100%;
+}
+.packageInputBoxContainers>Select{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+
+.packageCheckBoxContainers{
+    padding-left: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    width: 17%;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.packageCheckBoxContainers>label{
+    margin-top: 0.5%;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 4%;
+    margin-left: 2%;
+    width: 30%;
+}
+.savebtn{
+    background-color: #144463;
+    border-radius: 25px;
+    color: white;
+    border: none;
+    padding: 8px 35px;
+}
+.dwnldBtn{
+    background-color: white;
+    border-radius: 25px;
+    color: #144463;
+    border: 2px solid #144463;
+    padding: 8px 30px;
+}
+
+.toggle-container {
+    display: inline-block;
+    border: 2px solid #144463;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.toggle-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+
+.toggle-btn.active {
+    background-color: #007bff; / Blue color for active state /
+color: #fff;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggleBtn {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.toggleBtn:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #144463;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .toggleBtn {
+    background-color: white;
+    border: 1px solid #144463;
+}
+
+input:focus + .toggleBtn {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggleBtn:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+.toggleBtn.round {
+    border-radius: 34px;
+}
+
+.toggleBtn.round:before {
+    border-radius: 50%;
+}
+
+.packageInputBoxContainers1{
+    display: flex;
+    flex-direction: row;
+    width: 97%;
+    column-gap: 15px;
+    margin: auto;
+    margin-top: 2%;
+    height: 60px;
+}
+.packageInputBoxContainers1>input{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+.packageInputBoxContainers1>select{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+.packageMealOptions{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+}
+.packagemealbox{
+    border: 2px solid #E8E8E8;
+    background-color: #ECF0F4;
+    width: 14%;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.5%;
+}
+.packagemealbox>img{
+    height: 16px;
+    width: 22px;
+    margin: auto;
+    margin-left:7%;
+}
+.packagemealbox>p{
+    color: #144463;
+    font-weight: 500;
+    margin: auto;
+    width: 62%;
+}
+.packageMealInput{
+    border: 2px solid #E8E8E8;
+    width: 70%;
+    border-radius: 5px;
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.packageMealInput::placeholder{
+    padding-left: 15px;
+}
+.UnlimitedCheckbox{
+    width: 2%;
+    margin-left: 1%;
+}
+.UnlimitedCheckboxLabel{
+    margin: auto;
+    margin-left: 0.5%;
+    font-size: 15px;
+}
+.includeBox{
+    margin-left: 0.5%;
+    font-size: 15px;
+    margin-top: 0.5%;
+}
+.createPackageImage{
+    border: 2px solid #144463;
+    padding: 9px 25px;
+    background-color: white;
+    color: #144463;
+    height: 45px;
+    border-radius: 5px;
+}
+.createPackageImageBtn{
+    background-color: #144463;
+    color: white;
+    border: none;
+    height: 45px;
+    width: 10%;
+    border-radius: 5px;
+}

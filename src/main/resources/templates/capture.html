@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Picture Popup</title>
+    <!-- Bootstrap CSS (optional for styling) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-4">
+        <button class="btn btn-primary" id="captureButton">Capture Picture</button>
+    </div>
+
+</body>
+</html>
+
+
+
+    <!-- Bootstrap JS (optional for modal) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Script containing the openCameraPopup function -->
+    <script>
+        function openCameraPopup() {
+            const popupWindow = window.open('', '_blank', 'width=600,height=400');
+
+            const popupContent = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Camera Popup</title>
+                </head>
+                <body>
+                    <h2>Capture Picture</h2>
+                    <video id="cameraPreview" width="100%" height="auto" autoplay></video>
+                    <button onclick="capturePicture()">Capture</button>
+                </body>
+                </html>
+            `;
+
+            popupWindow.document.write(popupContent);
+
+            popupWindow.navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const cameraPreview = popupWindow.document.getElementById('cameraPreview');
+                    cameraPreview.srcObject = stream;
+                    cameraPreview.play();
+                })
+                .catch(error => {
+                    console.error('Error accessing the camera:', error);
+                });
+
+            popupWindow.capturePicture = function() {
+                const cameraPreview = popupWindow.document.getElementById('cameraPreview');
+                const canvas = popupWindow.document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = cameraPreview.videoWidth;
+                canvas.height = cameraPreview.videoHeight;
+                ctx.drawImage(cameraPreview, 0, 0, canvas.width, canvas.height);
+                const imageDataUrl = canvas.toDataURL('image/jpeg');
+                console.log('Captured Image:', imageDataUrl);
+                popupWindow.close(); // Close the popup after capturing
+            };
+        }
+
+        // Attach the onclick event after the function is defined
+        document.getElementById('captureButton').onclick = openCameraPopup;
+    </script>

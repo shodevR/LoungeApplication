@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Voucher</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/VoucherList.css">
+    <link rel="stylesheet" href="/create-voucher.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+    <div class="container-fluid row p-0 m-0" style="height: 100vh;">
+
+        <div class="col-lg-3 VoucherListLeft">
+
+            <div class="BBLlogoContainer">
+                <img src="/images/login/BBL.png" alt="">
+           </div>
+
+           <div class="voucherListButtons">
+               <ul class="nav nav-tabs tabContainer1" id="myTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="/voucherlist">
+                        <button class="nav-link custom-tab active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">
+                            <div class="tab-content-center">
+                                <img src="/images/VoucherList/VOUCHERMAIN.png" alt="" class="tab-icon">
+                                <span class="tab-text">Voucher</span>
+                            </div>
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="/voucherlist">
+                        <button class="nav-link custom-tab" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                            <div class="tab-content-center">
+                                <img src="/images/VoucherList/PackagesIcon.png" alt="" class="tab-icon">
+                                <span class="tab-text">Packages</span>
+                            </div>
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="/voucherlist">
+                        <button class="nav-link custom-tab" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">
+                            <div class="tab-content-center">
+                                <img src="/images/VoucherList/FootfallIcon.png" alt="" class="tab-icon">
+                                <span class="tab-text">Footfall</span>
+                            </div>
+                        </button>
+                    </a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a href="/voucherlist">
+                        <button class="nav-link custom-tab" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">
+                            <div class="tab-content-center">
+                                <img src="/images/VoucherList/Partner.png" alt="" class="tab-icon">
+                                <span class="tab-text">Partner</span>
+                            </div>
+                        </button>
+                    </a>
+                </li>
+               </ul>
+           </div>
+
+            <form th:action="@{/logout}" method="post">
+
+
+
+                <button class="logoutBtn" >
+
+                    <img src="/images/VoucherList/LogoutIcon.png" alt="" class="tab-icon" type="submit">
+                    <span class="tab-text">LogOut</span>
+
+                </button>
+            </form>
+
+        </div>
+
+        <div class="col-lg-9 p-0">
+
+            <div class="container-fluid p-0 m-0">
+
+                <div class="voucherListHeader container-fluid">
+                    <p>Update Voucher</p>
+                </div>
+
+            </div>
+            <div class="container-fluid voucherListParent" id="addVoucherForm">
+                <p class="text-danger p-4">All Fields are mandatory *</p>
+                <div class="packageInputBoxContainers mt-3">
+                    <input placeholder="01/01/2024" type="date" id="createdDate" name="issueDate" value="" disabled>
+                    <input type="text" placeholder="Voucher Name"  id="voucherName" name="voucherName">
+                    <select id="clientName" name="clientName"  class="clientSelect" disabled>
+                        <option value="select">Client Name</option>
+
+                    </select>
+                    <a href="/create-client">
+                    <div class="addClient">
+                        <img src="/images/VoucherList/Plus.png" alt="">
+                    </div>
+                    </a>
+                </div>
+                <div class="packageInputBoxContainers">
+                    <input type="text" placeholder="Client Email" id="email" name="email">
+                    <input type="number" placeholder="Number of vouchers" id="noOfVouchers" name="noOfVouchers" oninput="calculateTotalAmount()" disabled>
+                    <select id="packageDetails" name="packageDetails" class="arrowspace">
+                        <option value="select">Package Name</option>
+
+                    </select>
+                </div>
+                <div class="packageInputBoxContainers">
+                    <input placeholder="" type="date" id="issueDate" name="issueDate" value="">
+                    <input placeholder="Voucher Expiry Date" type="date" id="validDate" name="validDate">
+                    <input id="username" type="text" name="_csrf" th:value="${username}" disabled>
+                </div>
+                <div class="packageInputBoxContainers1">
+                    <input type="number" placeholder="Amount" id="amount" name="amount" oninput="calculateTotalAmount()" disabled>
+                    <input type="number" placeholder="Discount Percentage" id="discount" name="discount" oninput="calculateTotalAmount()" style="margin-left:0.7%">
+                </div>
+                <div class="packageInputBoxContainers1">
+                    <input type="number" placeholder="Cash Paid" id="cashPaid" name="cashPaid" oninput="calculateDueAmount()">
+                    <input type="text" placeholder="Due Amount" id="dueAmount" name="dueAmount" disabled style="margin-left: 0.8%">
+                </div>
+
+
+                <div class="packageCheckBoxContainers">
+                    <h6 class="my-1" id="cashLabel">Cash</h6>
+                    <label class="switch">
+                        <input type="checkbox" id="paymentToggle" checked>
+                        <span class="toggleBtn round"></span>
+                    </label>
+                    <h6 class="my-1" id="creditLabel">Credit</h6>
+                </div>
+
+
+
+                <div class="packageInputBoxContainers">
+                    <input type="text" placeholder="Total Amount" id="totalAmount" disabled>
+                </div>
+
+                <div class="buttonContainer">
+                    <button id="saveButton" class="savebtn">
+                        Save & Preview
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal Structure -->
+        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="previewModalLabel">Voucher Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <p><strong>Voucher Name:</strong> <span id="previewVoucherName"></span></p>
+                        <p><strong>Created Date:</strong> <span id="previewCreatedDate"></span></p>
+                        <p><strong>Client Email:</strong> <span id="previewEmail"></span></p>
+                        <p><strong>Number of Vouchers:</strong> <span id="previewNoOfVouchers"></span></p>
+                        <p><strong>Client ID:</strong> <span id="previewClientName"></span></p>
+                        <p><strong>Package ID:</strong> <span id="previewPackageDetails"></span></p>
+                        <p><strong>Issue Date:</strong> <span id="previewIssueDate"></span></p>
+                        <p><strong>Valid Date:</strong> <span id="previewValidDate"></span></p>
+                        <p><strong>Payment Type:</strong> <span id="previewPaymentType"></span></p>
+                        <p><strong>Amount:</strong> <span id="previewAmount"></span></p>
+                        <p><strong>Cash Paid:</strong> <span id="previewCashPaid"></span></p>
+                        <p><strong>Due Amount:</strong> <span id="previewDueAmount"></span></p>
+                        <p><strong>Prepared By:</strong> <span id="previewusername"></span></p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="confirmButton">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
+<script>
+    const pathArray = window.location.pathname.split('/');
+    const voucherId = pathArray[pathArray.length - 1];
+    var voucherClaimed = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+        const pathArray = window.location.pathname.split('/');
+        const voucherId = pathArray[pathArray.length - 1];
+
+        if (voucherId) {
+            fetch(`/api/voucher/voucherdetails/${voucherId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('voucherName').value = data.voucherName;
+                    document.getElementById('createdDate').value = data.createdDate;
+                    document.getElementById('email').value = data.client.email;
+                    document.getElementById('noOfVouchers').value = data.noOfVouchers;
+                    document.getElementById('clientName').value = data.client.clientId;
+                    document.getElementById('packageDetails').value = data.packageDetails.packageId;
+                    document.getElementById('issueDate').value = data.issueDate;
+                    document.getElementById('validDate').value = data.validDate;
+                    document.getElementById('totalAmount').value = data.amount;
+                   document.getElementById('amount').value = data.packageDetails.amount;
+                    document.getElementById('discount').value = data.client.discount;
+                    document.getElementById('cashPaid').value = data.cashPaid;
+                    document.getElementById('dueAmount').value = data.dueAmount;
+                    document.getElementById('username').value = data.preparedBy;
+                    document.getElementById('paymentToggle').checked = data.paymentType === 'Credit';
+                    populateClientSelect(data.client.clientId);
+                    populatePackageSelect(data.packageDetails.packageId);
+                    voucherClaimed = data.claimed;
+                })
+                .catch(error => console.error('Error fetching voucher data:', error));
+        }
+    });
+    function calculateTotalAmount() {
+        let amount = document.getElementById('amount').value;
+        let noOfVouchers = document.getElementById('noOfVouchers').value;
+        let discount = document.getElementById('discount').value;
+
+        console.log("amount: "+ amount);
+        console.log("noOfVouchers : "+ noOfVouchers);
+        console.log("discount: "+ discount);
+
+
+        amount = parseFloat(amount);
+        noOfVouchers = parseFloat(noOfVouchers);
+        discount = parseFloat(discount);
+
+        let totalAmount = amount * noOfVouchers - (amount * noOfVouchers * discount / 100);
+        console.log(totalAmount);
+
+        document.getElementById('totalAmount').value = totalAmount.toFixed(2);
+
+        calculateDueAmount(); // Recalculate the due amount when the total amount changes
+    }
+
+    function calculateDueAmount() {
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+        const cashPaid = parseFloat(document.getElementById('cashPaid').value) || 0;
+        const dueAmount = totalAmount - cashPaid;
+        document.getElementById('dueAmount').value = dueAmount.toFixed(2);
+    }
+
+    // The rest of the code remains unchanged
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+
+
+
+
+    var ptype = "Credit";
+    document.getElementById('paymentToggle').addEventListener('change', function() {
+        if (this.checked) {
+            ptype='Credit';
+        } else {
+            ptype='Cash';
+        }
+    });
+    console.log(ptype);
+    var formData={};
+    document.getElementById("saveButton").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        var voucherName = document.getElementById("voucherName").value;
+        var createdDate = document.getElementById("createdDate").value;
+        var email = document.getElementById("email").value;
+        var noOfVouchers = document.getElementById("noOfVouchers").value;
+        var clientName = document.getElementById("clientName").value;
+        var packageIds = document.getElementById("packageDetails").value;
+        var validDate = document.getElementById("validDate").value;
+        var amount = document.getElementById("totalAmount").value;
+        var cashPaid = document.getElementById("cashPaid").value;
+        var dueAmount = document.getElementById("dueAmount").value;
+
+        if (voucherName == "" || createdDate == "" || email == "" || noOfVouchers == "" || clientName == "" || packageIds == "" || validDate == "" || amount == "" || cashPaid == "") {
+            alert("Please fill all the fields!");
+            return;
+        }
+
+        formData = {
+            voucherId : voucherId,
+            voucherName: document.getElementById("voucherName").value,
+            createdDate: document.getElementById("createdDate").value,
+            email: document.getElementById("email").value,
+            noOfVouchers: parseInt(document.getElementById("noOfVouchers").value),
+            client: {
+                clientId: parseInt(document.getElementById("clientName").value)
+            },
+            packageDetails: {
+                packageId: parseInt(document.getElementById("packageDetails").value)
+            },
+            issueDate: document.getElementById("issueDate").value,
+            validDate: document.getElementById("validDate").value,
+            paymentType: ptype,
+            amount: parseInt(document.getElementById("totalAmount").value),
+            cashPaid: parseFloat(document.getElementById("cashPaid").value),
+            dueAmount: parseFloat(document.getElementById("dueAmount").value),
+            preparedBy: document.getElementById("username").value,
+            claimed : voucherClaimed
+        };
+
+        document.getElementById('previewVoucherName').textContent = formData.voucherName;
+        document.getElementById('previewCreatedDate').textContent = formData.createdDate;
+        document.getElementById('previewEmail').textContent = formData.email;
+        document.getElementById('previewClientName').textContent = document.getElementById("clientName").value;
+        document.getElementById('previewPackageDetails').textContent = document.getElementById("packageDetails").value;
+        document.getElementById('previewNoOfVouchers').textContent = document.getElementById("noOfVouchers").value;
+        document.getElementById('previewIssueDate').textContent = formData.issueDate;
+        document.getElementById('previewValidDate').textContent = formData.validDate;
+        document.getElementById('previewPaymentType').textContent = formData.paymentType;
+        document.getElementById('previewAmount').textContent = formData.amount;
+        document.getElementById('previewCashPaid').textContent = formData.cashPaid;
+        document.getElementById('previewDueAmount').textContent = formData.dueAmount;
+        document.getElementById('previewusername').textContent = formData.preparedBy;
+
+        var modal = new bootstrap.Modal(document.getElementById('previewModal'));
+        modal.show();
+    });
+
+    document.getElementById("confirmButton").addEventListener("click", function(event) {
+        // Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        console.log(csrfToken);
+        console.log(csrfHeader);
+
+        // Ensure CSRF token and header name are retrieved correctly
+        if (!csrfToken || !csrfHeader) {
+            console.error('CSRF token or header name not found');
+            alert('CSRF token or header name not found. Please check your HTML.');
+            return;
+        }
+
+        // Create headers object
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append(csrfHeader, csrfToken);
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', '/api/voucher/update', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader(csrfHeader, csrfToken);
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                var response = JSON.parse(xhr.responseText);
+                alert("Voucher Updated with ID : " + response.voucherId);
+
+                // Call the resetFormFields function to clear the form
+                resetFormFields();
+            } else {
+                console.error('Error:', xhr.statusText);
+                alert("Error adding voucher!");
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error('Request failed');
+        };
+
+        xhr.send(JSON.stringify(formData));
+    });
+
+    function resetFormFields() {
+        document.getElementById("voucherName").value = '';
+        document.getElementById("createdDate").value = '';
+        document.getElementById("email").value = '';
+        document.getElementById("noOfVouchers").value = '';
+        document.getElementById("clientName").value = 'select';
+        document.getElementById("packageDetails").value = 'select';
+        document.getElementById("validDate").value = '';
+        document.getElementById("amount").value = '';
+        document.getElementById("discount").value = '';
+        document.getElementById("totalAmount").value = '';
+    }
+    // Fetch package details and populate the dropdown menu
+   /* fetch('/api/packages/getAllPackages')
+        .then(response => response.json())
+        .then(packageDetails => {
+            var dropdown = document.getElementById('packageDetails');
+            packageDetails.forEach(detail => {
+                var option = document.createElement('option');
+                option.value = detail.packageId;
+                option.textContent = detail.packageName;
+                dropdown.appendChild(option);
+            });
+
+            // Listen for changes in the selected package
+            dropdown.addEventListener('change', function() {
+                var selectedPackageId = parseInt(this.value);
+                // Find the selected package details
+                var selectedPackage = packageDetails.find(detail => detail.packageId === selectedPackageId);
+                // If the selected package is found, update the amount field
+                if (selectedPackage) {
+                    document.getElementById('amount').value = selectedPackage.amount;
+
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching package details:', error));*/
+    function populatePackageSelect(selectedPackageId) {
+        fetch('/api/packages/getAllPackages')
+            .then(response => response.json())
+            .then(packages => {
+                const packageSelect = document.getElementById('packageDetails');
+                packages.forEach(pkg => {
+                    const option = document.createElement('option');
+                    option.value = pkg.packageId;
+                    option.textContent = pkg.packageName;
+                    if (pkg.packageId === selectedPackageId) {
+                        option.selected = true;
+                    }
+                    packageSelect.appendChild(option);
+                });
+                packageSelect.addEventListener('change', function() {
+                    var selectedPackageId = parseInt(this.value);
+                    // Find the selected package details
+                    var selectedPackage = packages.find(detail => detail.packageId === selectedPackageId);
+                    // If the selected package is found, update the amount field
+                    if (selectedPackage) {
+                        document.getElementById('amount').value = selectedPackage.amount;
+                        console.log(selectedPackage.amount);
+                        calculateTotalAmount();
+
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching packages:', error));
+    }
+
+    // Fetch client details and populate the dropdown menu
+   /* fetch('/api/client/getAll')
+        .then(response => response.json())
+        .then(clients => {
+            var dropdown = document.getElementById('clientName');
+            clients.forEach(client => {
+                var option = document.createElement('option');
+                option.value = client.clientId;
+                option.textContent = client.clientName;
+                dropdown.appendChild(option);
+            });
+            // Listen for changes in the selected package
+            dropdown.addEventListener('change', function() {
+                var selectedClientId = parseInt(this.value);
+                // Find the selected package details
+                var selectedClient = clients.find(detail => detail.clientId === selectedClientId);
+                // If the selected package is found, update the amount field
+                if (selectedClient) {
+                    console.log(selectedClient);
+                    document.getElementById('discount').value = selectedClient.discount;
+                    document.getElementById('email').value = selectedClient.email;
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching client details:', error));*/
+    function populateClientSelect(selectedClientId) {
+        fetch('/api/client/getAll')
+            .then(response => response.json())
+            .then(clients => {
+                const clientSelect = document.getElementById('clientName');
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.clientId;
+                    option.textContent = client.clientName;
+                    if (client.clientId === selectedClientId) {
+                        option.selected = true;
+                    }
+                    clientSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching clients:', error));
+    }
+</script>

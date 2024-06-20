@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Package Details</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .container {
+        margin-top: 50px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center mb-4">Package Details</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Package ID</th>
+                <th>Package Name</th>
+                <th>Hour</th>
+                <th> Hard Drinks</th>
+                <th>Soft Drink</th>
+                <th>Meal</th>
+                <th>WiFi</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="packageTableBody">
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to fetch package details
+        function fetchPackages() {
+            $.get('/packages/getAllPackages', function(data) {
+                $('#packageTableBody').empty(); // Clear existing rows
+                data.forEach(function(package) {
+                    const row = `
+                        <tr id="package-${package.packageId}">
+                            <td>${package.packageId}</td>
+                            <td>${package.packageName}</td>
+                            <td>${package.hour}</td>
+                            <td>${package.drinks ? 'Yes' : 'No'}</td>
+                            <td>${package.softDrink ? 'Yes' : 'No'}</td>
+                            <td>${package.lunch ? 'Yes' : 'No'}</td>
+                            <td>${package.wifi ? 'Yes' : 'No'}</td>
+                            <td>
+                                <button class="btn btn-danger" onclick="deletePackage(${package.packageId})">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#packageTableBody').append(row); // Append new row
+                });
+            });
+        }
+
+        // Initial fetch of packages when the page loads
+        fetchPackages();
+
+        // Function to delete a package
+        window.deletePackage = function(packageId) {
+            $.ajax({
+                url: '/packages/removePackage',
+                type: 'DELETE',
+                data: { packageId: packageId },
+                success: function() {
+                    // Remove the deleted row from the table
+                    $('#package-' + packageId).remove();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to delete package:', error);
+                }
+            });
+        };
+    });
+</script>
+</body>
+</html>

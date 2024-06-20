@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Ticket</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Add Ticket</h2>
+    <form id="ticketForm">
+        <label for="ticketType">Ticket Type:</label>
+        <select id="ticketType" name="ticketType">
+            <option value="">Select Ticket Type</option>
+            <option value="Walkin">Walkin</option>
+            <option value="Voucher">Voucher</option>
+            <option value="Partners">Partners</option>
+        </select><br><br>
+        
+        <label for="pnr">PNR:</label>
+        <input type="text" id="pnr" name="pnr"><br><br>
+        
+        <label for="sequence">Sequence:</label>
+        <input type="text" id="sequence" name="sequence"><br><br>
+        
+        <label for="airlineName">Airline Name:</label>
+        <input type="text" id="airlineName" name="airlineName"><br><br>
+        
+        <label for="flightNumber">Flight Number:</label>
+        <input type="text" id="flightNumber" name="flightNumber"><br><br>
+        
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName"><br><br>
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName"><br><br>
+        
+        <label for="partner">Partner:</label>
+        <input type="text" id="partner" name="partner"><br><br>
+        
+        <label for="doc">Doc:</label>
+        <input type="text" id="doc" name="doc"><br><br>
+        
+        <label for="paymentMethod">Payment Method:</label>
+        <input type="text" id="paymentMethod" name="paymentMethod"><br><br>
+        
+        <div id="voucherSection" style="display: none;">
+            <label for="voucherId">Voucher ID:</label>
+            <input type="text" id="voucherIdInput" name="voucherIdInput">
+            <button type="button" id="searchVoucher">Search</button><br><br>
+            <select id="voucherId" name="voucherId">
+                <option value="">Select Voucher</option>
+            </select><br><br>
+        </div>
+        
+        <label for="packageId">Package:</label>
+        <select id="packageId" name="packageId">
+            <option value="">Select Package</option>
+        </select><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Fetch packages via AJAX
+        $(document).ready(function(){
+            $.ajax({
+                url: "/packages/getAllPackages",
+                type: "GET",
+                success: function(data) {
+                    var options = '<option value="">Select Package</option>';
+                    data.forEach(function(package) {
+                        options += '<option value="' + package.packageId + '">' + package.packageName + '</option>';
+                    });
+                    $('#packageId').html(options);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        // Show/hide voucher section based on ticket type
+        $('#ticketType').change(function() {
+            var ticketType = $(this).val();
+            if (ticketType === 'Voucher') {
+                $('#voucherSection').show();
+            } else {
+                $('#voucherSection').hide();
+            }
+        });
+
+        // Search voucher by ID
+        $('#searchVoucher').click(function() {
+            var voucherId = $('#voucherIdInput').val();
+            if (voucherId.trim() !== '') {
+                $.ajax({
+                    url: "/voucher/getAll",
+                    type: "GET",
+                    success: function(data) {
+                        var options = '<option value="">Select Voucher</option>';
+                        data.forEach(function(voucher) {
+                            if (voucher.voucherId == voucherId) {
+                                options += '<option value="' + voucher.voucherId + '">' + voucher.voucherName + '</option>';
+                            }
+                        });
+                        $('#voucherId').html(options);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+
+        // Submit form data via AJAX
+       $('#ticketForm').submit(function(event) {
+    event.preventDefault();
+    var formData = {
+        ticketType: $('#ticketType').val(),
+        pnr: $('#pnr').val(),
+        sequence: $('#sequence').val(),
+        airlineName: $('#airlineName').val(),
+        flightNumber: $('#flightNumber').val(),
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        partner: $('#partner').val(),
+        doc: $('#doc').val(),
+        paymentMethod: $('#paymentMethod').val(),
+        voucherId: $('#voucherId').val(),
+        packageId: $('#packageId').val()
+    };
+
+    $.ajax({
+        url: "/api/ticket/addTicket",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function(response) {
+            console.log("Ticket added:", response);
+            // Handle success
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            // Handle error
+        }
+    });
+});
+    </script>
+</body>
+</html>

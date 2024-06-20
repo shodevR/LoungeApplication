@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Voucher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        select,
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Add Voucher</h1>
+            <form id="addVoucherForm">
+                <label for="voucherName">Voucher Name:</label>
+                <input type="text" id="voucherName" name="voucherName">
+
+                <!-- Select client -->
+                <label for="clientName">Client Name:</label>
+                <select id="clientName" name="clientName"></select>
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
+
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+
+                <label for="noOfVouchers">Number of Vouchers:</label>
+                <input type="number" id="noOfVouchers" name="noOfVouchers">
+
+                <label for="issueDate">Issue Date:</label>
+                <input type="date" id="issueDate" name="issueDate" value="" disabled>
+
+                <label for="validDate">Valid Date:</label>
+                <input type="date" id="validDate" name="validDate">
+
+                <label for="paymentType">Payment Type:</label>
+                <input type="text" id="paymentType" name="paymentType">
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount">
+
+                <label for="preparedBy">Prepared By:</label>
+                <input type="text" id="preparedBy" name="preparedBy">
+
+                <!-- Select package details -->
+                <label for="packageDetails">Package Details:</label>
+                <select id="packageDetails" name="packageDetails"></select>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('issueDate').value = today;
+
+    document.getElementById("addVoucherForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var formData = {
+            voucherName: document.getElementById("voucherName").value,
+            email: document.getElementById("email").value,
+            noOfVouchers: parseInt(document.getElementById("noOfVouchers").value),
+            client: {
+                clientId: parseInt(document.getElementById("clientName").value)
+            },
+            packageDetails: {
+                packageId: parseInt(document.getElementById("packageDetails").value)
+            },
+            issueDate: today,
+            validDate: document.getElementById("validDate").value,
+            paymentType: document.getElementById("paymentType").value,
+            amount: parseInt(document.getElementById("amount").value),
+            preparedBy: document.getElementById("preparedBy").value
+        };
+
+        console.log(formData);
+        // AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/voucher/addvoucher', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log('Success:', xhr.responseText);
+                alert("Voucher added successfully!");
+
+                // Reset the form fields
+                document.getElementById("addVoucherForm").reset();
+            } else {
+                console.error('Error:', xhr.statusText);
+                // Optionally, you can show an error message to the user
+                alert("Error adding voucher!");
+            }
+        };
+        xhr.onerror = function() {
+            console.error('Request failed');
+            // Optionally, you can show an error message to the user
+        };
+        xhr.send(JSON.stringify(formData));
+    });
+    // Fetch package details and populate the dropdown menu
+    fetch('/packages/getAllPackages')
+        .then(response => response.json())
+        .then(packageDetails => {
+            var dropdown = document.getElementById('packageDetails');
+            packageDetails.forEach(detail => {
+                var option = document.createElement('option');
+                option.value = detail.packageId;
+                option.textContent = detail.packageName;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching package details:', error));
+
+    // Fetch client details and populate the dropdown menu
+    fetch('/client/getAll')
+        .then(response => response.json())
+        .then(clients => {
+            var dropdown = document.getElementById('clientName');
+            clients.forEach(client => {
+                var option = document.createElement('option');
+                option.value = client.clientId;
+                option.textContent = client.clientName;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching client details:', error));
+</script>
+
+</body>
+</html>

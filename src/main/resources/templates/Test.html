@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="walkin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="mt-5">
+    <h5>Select Package</h5>
+    <div class="packageCardContainer" id="packageContainer">
+        <!-- Package cards will be dynamically inserted here -->
+
+    </div>
+</div>
+
+
+</body>
+<script>
+
+    function createPackageCard(package) {
+        return `
+        <div class="row w-50">
+            <div class="card packageCardBox">
+                <div class="d-flex">
+                    <img src="${package.image}" class="packageImg" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="packageHeading">${package.packageName}</h4>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/timeAccess.png" alt="" class="packageIcons">
+                            <p>${package.times} time access allowed</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Validity.png" alt="" class="packageIcons">
+                            <p> Valid for ${package.hour} Months</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/HourAccess.png" alt="" class="packageIcons">
+                            <p>Limited for ${package.hour} hours access</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Food.png" alt="" class="packageIcons">
+                            <p> Unlimited food and soft drinks</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/Harddrinks.png" alt="" class="packageIcons">
+                            <p>${package.drinks === 'true' ? 'Limited Hard Drinks' : 'No Hard Drinks'}</p>
+                        </div>
+                        <div class="packageIconDiv">
+                            <img src="/images/WalkIn/wifi.png" alt="" class="packageIcons">
+                            <p> Unlimited Wi-Fi Access</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex align-items-center justify-content-between">
+                    <div>
+                        <p class="m-0">Price</p>
+                        <h4 class="pricePackage">USD ${package.amount}</h4>
+                    </div>
+                    <button class="packageSelectBtn" onclick="myFunction('${package.packageId}')">Select</button>
+                </div>
+            </div>
+        </div>
+    `;
+    }
+
+    function myFunction(packageId) {
+        console.log(packageId);
+
+
+    }
+
+
+    // data is fetching with the ajax
+    $(document).ready(function () {
+        $.ajax({
+            url: "/packages/getAllPackages",
+            type: "GET",
+            success: function (data) {
+                var options = '<option value="">Select Package</option>';
+                data.forEach(function (package) {
+                    options += '<option value="' + package.packageId + '">' + package.packageName + '</option>';
+                });
+                $('#packageId').html(options);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Fetch package data from the API
+    fetch('/packages/getAllPackages')
+        .then(response => response.json())
+        .then(data => {
+
+            const packageContainer = document.getElementById('packageContainer');
+            console.log(data);
+            // Loop through the package data and create HTML for each package card
+            data.forEach(package => {
+                packageContainer.innerHTML += createPackageCard(package);
+            });
+        })
+        .catch(error => console.error('Error fetching package data:', error));
+
+</script>
+</html>

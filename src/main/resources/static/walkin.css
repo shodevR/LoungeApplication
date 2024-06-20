@@ -1,0 +1,418 @@
+.walkinLogo>img{
+    width: 380px;
+    height: 60px;
+    padding: 15px;
+}
+.walkinContainer{
+    background-color: #F4F6F8;
+    height: auto;
+}
+
+.ticketNumDiv>button{
+    background-color: #E3EBF2;
+    border: 1px solid #B7D0E2;
+    border-radius: 20px;
+    color: #144463;
+    padding: 8px 25px;
+    margin-left: 2%;
+    font-weight: bold;
+}
+.tabContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tabContainer > li {
+    border: 2px solid #E8E8E8;
+    width: 32%;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.tabContainer > li > button {
+    width: 100%;
+    color: #144463;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.tabContainer .nav-item .nav-link.active {
+    background-color: #144463;
+    color: #fff !important;
+    border-color: #144463;
+}
+.custom-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.tab-content-center {
+    display: flex;
+    align-items: center;
+}
+
+.tab-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    border: 2px solid #E8E8E8;
+    border-radius: 5px;
+}
+
+.tab-text {
+    display: inline-block;
+}
+.packageCardContainer{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 37px;
+    row-gap: 12px;
+}
+.inputBoxContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.inputBoxContainer>div>input{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: block;
+}
+.inputBoxContainer>div>select{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+.inputBoxContainer>input{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 15px;
+    border-radius: 8px;
+    display: block;
+}
+.inputBoxContainer>select{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 15px;
+    border-radius: 8px;
+}
+
+
+.textfield {
+    position: relative;
+    box-sizing: border-box;
+    min-width: 32%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.textfield__label {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(77, 77, 77, 0.5);
+    user-select: none;
+    cursor: text;
+}
+.textfield__label::after {
+    position: relative;
+    top: -3px;
+    left: 1px;
+    display: inline-block;
+    content: "*";
+    color: #d0011b;
+}
+.textfield__input {
+    display: block;
+    box-sizing: border-box;
+    height: 50px;
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #E8E8E8;
+    border-radius: 5px;
+    background: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    outline: none;
+    transition: all 0.25s linear;
+}
+.textfield__input:focus {
+    border-color: #3a82c6;
+}
+.textfield__input:disabled {
+    border-color: #e6e6e6;
+    background: #f9fafb;
+}
+.textfield__input::placeholder {
+    color: transparent;
+}
+.textfield__input:focus + .textfield__label, .textfield__input:valid + .textfield__label, .textfield__input:disabled + .textfield__label {
+    display: none;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+}
+body > *:not(:last-child) {
+    margin-right: 30px;
+}
+
+.inputBoxContainer1{
+    display: flex;
+    flex-direction: row;
+    column-gap: 25px;
+    width:100%;
+}
+.inputBoxContainer1>fieldset>input{
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+.uploadDocumentDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.uploadDocumentDiv>div{
+    width: 23%;
+    border-radius: 8px;
+}
+.PassportButton{
+    border: 2px solid #144463;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px 25px;
+}
+.walkinIdButton{
+    border: 2px solid #E8E8E8;
+    color: #B8B8B8;
+    background-color: #E8E8E8;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px 25px;
+}
+
+#passportCapturedImage{
+    width: 285px;
+    height: 200px;
+    margin-top: 2%;
+}
+#boardingPassCapturedImage{
+    width: 285px;
+    height: 200px;
+    margin-top: 2%;
+}
+#otherCapturedImage{
+    width: 285px;
+    height: 200px;
+    margin-top: 2%;
+}
+#idCapturedImage{
+    width: 285px;
+    height: 200px;
+    margin-top: 2%;
+}
+
+.paymentButton {
+    cursor: pointer;
+    border: 2px solid #144463;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    padding: 15px 25px;
+}
+
+.paymentButton.active {
+    background-color: #144463;
+    color: white;
+    border: 2px solid #b8b8b8;
+}
+.paymentButton1 {
+    cursor: pointer;
+    background-color: #E8E8E8;
+    color: #b8b8b8;
+    border: 2px solid #E8E8E8;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px 25px;
+}
+.paymentButtonWalkin {
+    cursor: pointer;
+    background-color: white;
+    color: #144463;
+    border: 2px solid #144463;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px 25px;
+}
+
+.paymentButton1.active {
+    border: 2px solid #144463;
+    color: white !important;
+    background-color: #144463;
+    color: #144463;
+}
+.paymenttabContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.paymenttabContainer > li {
+    border: 2px solid #E8E8E8;
+    width: 24%;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.paymenttabContainer > li > button {
+    width: 100%;
+    color: black !important;
+    border: 2px solid #144463 !important;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.paymenttabContainer .nav-item .nav-link.active {
+    background-color: #144463;
+    color: #fff !important;
+    border-color: #144463;
+}
+
+.addGuestBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 10%;
+    text-decoration: none;
+    color: #144463;
+    font-weight: bold;
+    vertical-align: middle;
+}
+.addGuestBtn>img{
+    height: 30px;
+}
+.walkinSaveBtn{
+    border: 2px solid #144463;
+    background-color: #144463;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.packageCardBox{
+    padding: 10px;
+}
+.packageImg{
+    padding: 10px;
+    width: 45%;
+}
+.packageHeading{
+    color: #144463;
+    font-weight: bold;
+}
+.packageIcons{
+    width: 15px;
+    height: 15px;
+    margin: 2%;
+}
+.packageIconDiv{
+    height: 30px;
+    display:flex;
+    flex-direction: row;
+}
+.pricePackage{
+    color: #FF8900;
+}
+.packageSelectBtn{
+    border: 2px solid #144463;
+    color: #144463;
+    background-color: white;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 25px;
+    padding: 10px 45px;
+}
+.selectedbtncolor{
+    background-color: #144463 !important;
+    color: white !important;
+}
+.voucherupgradeHeading{
+    color: #144463;
+}
+.upgraderowBoxes{
+    column-gap: 45px;
+    row-gap: 25px;
+}
+
+.airlineDropdown{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.airlineDropdown>input{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-left: 2%
+}
+.airlineDropdown>Select{
+    width: 32%;
+    border: 2px solid #E8E8E8;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+
+.walkinLogoutBtn{
+    border: 2px solid #144463;
+    color: #144463;
+    background-color: white;
+    width: 100%;
+    height: 45px;
+    margin-top: 0.5%;
+    border-radius: 5px;
+}
+.printTicketBtn {
+    margin-left: 45%;
+    margin-top: 8%;
+    background-color: #144463;
+    color: white;
+    border: none;
+    width: 9%;
+}
+

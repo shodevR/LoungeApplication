@@ -1,0 +1,602 @@
+.VoucherListLeft{
+    background-color: #144463;
+    height: auto;
+}
+.BBLlogoContainer{
+    height: 60px;
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+}
+.BBLlogoContainer>img{
+    width: 100%;
+    height: 75%;
+}
+.voucherListButtons>ul{
+    display: flex;
+    flex-direction: column;
+}
+.tabContainer1{
+    margin-top: 15%;
+    border-bottom: none;
+}
+.tabContainer1 .nav-item .nav-link.active {
+    background-color: #EA993A;
+    color: #fff !important;
+    border-color: #144463;
+}
+.tabContainer1 .nav-item .nav-link.active>div>img{
+    filter: invert(100%);
+}
+.tabContainer1 > li {
+    width: 80%;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 4%;
+
+}
+.tabContainer1 > li > button{
+    width: 100%;
+    margin: none;
+    padding: 15px;
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.tabContainer1 > li >button > div{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding-left: 15px;
+}
+.tabContainer1 > li >button > div >img{
+    height: 20px;
+    margin-top: 1%;
+}
+.tabContainer1 > li >button > div > span{
+    margin-left: 25px;
+}
+
+.logoutBtn{
+    width: 80%;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+    border: none;
+    padding: 15px;
+    margin-top: 55%;
+    margin-left: 10%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.logoutBtn >img{
+    padding-left: 20px;
+}
+
+.logoutBtn>span{
+    margin-left: 6%;
+    font-weight: 400;
+}
+
+.voucherListHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding:18px;
+}
+.voucherListHeader>img{
+    height: 18px;
+    width: 18px;
+    margin-left: 1%;
+}
+.voucherListHeader>p{
+    font-weight: bold;
+    font-size: 18px;
+    margin: auto;
+    margin-left: 1%;
+}
+.voucherListParent{
+    background-color: #F4F6F8;
+    height: auto;
+    border: 2px solid #F4F6F8;
+    padding-bottom: 20%;
+}
+.footfallscrolldata{
+    width: 50%;
+    height: 380px;
+    overflow-y: scroll;
+    border: 1px solid #E8E8E8;
+    padding: 8px;
+    border-radius: 5px
+}
+.voucherListDiv{
+    height: auto;
+    width: 100%;
+    margin: auto;
+    margin-top: 3%;
+    border: 2px solid #E8E8E8;
+    border-radius: 8px;
+}
+.voucherHeading{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 20%;
+}
+.voucherHeading>img{
+    height: 20px;
+    width: 22px;
+    margin-left: 1%;
+}
+.voucherHeading>p{
+    font-weight: bold;
+    font-size: 18px;
+    margin: auto;
+    margin-left: 5%;
+}
+.voucherListoptions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 8px;
+}
+.voucherListoptionsBox{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.voucherListoptionsBox1{
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.search-input {
+    width: 200px;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #B5C3CD;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.search-icon {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #144463;
+    font-weight: bold;
+}
+.clientListDiv{
+    border: 1px solid #B5C3CD;
+    color: #144463;
+    border-radius: 4px;
+    padding: 7px 12px;
+}
+.clientListDiv>a{
+    color: #144463;
+    text-decoration: none;
+}
+.importDiv{
+    border: 1px solid #B5C3CD;
+    border-radius: 4px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+.importDiv>img{
+    height: 17px;
+    width: 18px;
+}
+.addDiv{
+    background-color: #144463;
+    border: 2px solid white;
+    border-radius: 4px;
+    padding: 4px 14px;
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th, td {
+    border-bottom: 1px solid #E9EAEA;
+    padding: 8px;
+    text-align: left;
+}
+
+
+th {
+    background-color: #F4F6F8;
+    color: #6D6D6D;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+td {
+    background-color: #f9f9f9;
+    text-align: left;
+}
+.packageListTable{
+    text-align: left;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggleBtn {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.toggleBtn:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #144463;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .toggleBtn {
+    background-color: white;
+    border: 1px solid #144463;
+}
+
+input:focus + .toggleBtn {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggleBtn:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+.toggleBtn.round {
+    border-radius: 34px;
+}
+
+.toggleBtn.round:before {
+    border-radius: 50%;
+}
+
+
+
+
+.packageCheckBoxContainers{
+    padding-left: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    width: 17%;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.packageCheckBoxContainers>label{
+    margin-top: 0.5%;
+}
+
+
+.footfallBoxContainers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footfallBoxContainers>a{
+    width: 24%;
+    border-radius: 5px;
+    border: 1px solid #E8E8E8;
+    background-color: white;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.footfallDataDiv{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2%;
+}
+.footfallCustomerOption{
+    background-color: white;
+    padding: 25px;
+    text-align: center;
+}
+.footfallCustomerOption>div{
+    width: 100%;
+}
+.footfallCustomerOption>select{
+    width: 100%;
+}
+
+.footfallSearch{
+    width: 482px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    height: 45px;
+    border: 2px solid #e8e8e8;
+    padding-left: 28px;
+}
+
+.footfallSearch>select::placeholder{
+    padding-left:15px;
+    margin-left:60px;
+}
+
+.footfallSelect {
+    width: 455px;
+    margin-top: 5%;
+    border: 2px solid #E8E8E8;
+    padding: 8px 25px;
+    padding-left: 29px; /* Add padding to the left for text spacing */
+    appearance: none; /* Remove default appearance */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.094 2.446"><path fill="%23000" d="M2.047 2.446L0 0h4.094z"/></svg>') no-repeat right 30px center;
+    background-color: white; /* Ensure background color matches */
+    background-size: 12px; /* Size of the arrow */
+}
+
+.footfallDates{
+    margin-top: 5%;
+    width: 93.5%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footfallDates>input{
+    width: 48%;
+    border: 2px solid #E8E8E8;
+    padding: 8px 25px;
+    margin-top: 4%;
+    color: #144463;
+}
+.footfallSearchBtn{
+    border: 15px;
+    background-color: #144463;
+    color: white;
+    width: 92%;
+    margin: auto;
+    border-radius: 25px;
+    margin-top: 8%;
+}
+.footfallSearchBtn>button{
+    padding: 8px 25px;
+    width: 100%;
+    background-color: #144463;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+}
+.footfallCustomerOptionContainer{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2%;
+}
+.footfallCustomerOptionImg{
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 15px;
+    width: 100%;
+    height: 160px;
+    position: relative;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footfalloptionText{
+    border-bottom: 1px solid #E8E8E8;
+}
+.footfalldataDiv{
+    display: flex;
+    flex-direction: row;
+}
+.footfallCustomerOptionBox{
+    display: flex;
+    flex-direction: row;
+    width: 68%;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 15px;
+    border: 1px solid #E8E8E8;
+    border-radius: 10px;
+}
+.footfallNumber{
+    border-right: 1px solid #E8E8E8;
+    width: 40%;
+}
+.footfallList{
+    text-align: left;
+    width: 60%;
+    padding-top: 15px;
+}
+.footfallNumberBox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    color: #144463;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+
+.packageListoptions{
+    display: flex;
+    flex-direction: column;
+}
+.filteroptionsheading{
+    color: #144463;
+}
+.filterselectBtn{
+    border: 2px solid #144463;
+    color: white;
+    background-color:#144463;
+    border-radius: 8px;
+    padding: 6px 45px;
+    font-weight: bold;
+    width:42%;
+}
+.filterremoveBtn{
+    border: 2px solid #144463;
+    color: #144463;
+    background-color:white;
+    border-radius: 8px;
+    padding: 11px 45px;
+    font-weight: bold;
+    width:42%;
+    font-size:11px !important;
+}
+.filterdatesInput{
+    border: 1px solid #B8B8B8;
+    border-radius: 5px;
+    background-color: white;
+    padding: 8px 18px;
+}
+
+.dwnldTicketDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.dwnldTicketDiv>input{
+    width: 24%;
+    border: 2px solid #E8E8E8;
+    color: #144463;
+    background-color: white;
+    border-radius: 8px;
+    padding: 9px 25px;
+}
+.dwnldTicketDiv>button{
+    width: 24%;
+    border: 2px solid #144463;
+    color: white;
+    background-color: #144463;
+    border-radius: 8px;
+    padding: 9px 25px;
+}
+.dwnldTicketDiv>select{
+    width: 24%;
+    border: 2px solid #E8E8E8;
+    color: #144463;
+    background-color: white;
+    border-radius: 8px;
+    padding: 9px 25px;
+}
+.cancelVoucherContainer>input{
+    width: 90%;
+    border: 2px solid #E8E8E8;
+    color: #144463;
+    background-color: white;
+    border-radius: 8px;
+    padding: 9px 25px;
+    margin: auto;
+    margin-top: 5%;
+}
+.cancelVoucherContainer>button{
+    width: 90%;
+    border: 2px solid #144463;
+    color: white;
+    background-color: #144463;
+    border-radius: 8px;
+    padding: 9px 25px;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+.voucherTicketMain{
+    width: 800px;
+    height: 350px;
+    background-image: url("/images/Voucher.png");
+    background-size: cover;
+    margin-top: 2%;
+    border: 2px solid white;
+}
+.voucherTicketQR{
+    width: 40%;
+    height: 75%;
+    margin-left: 67%;
+    margin-top: 5%;
+}
+.voucherTicketQR>p{
+    margin-left: 11%;
+    font-weight: bold;
+}
+.voucherTicketQR>h6{
+    font-weight: bold;
+    margin-left: 3%;
+    /* border: 2px solid red; */
+    width: 58%;
+    text-align: center;
+}
+
+.active1 {
+    background-color: green;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    border: none;
+    width: 70%;
+    padding: 5px;
+}
+
+.inactive1 {
+    background-color: red;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    border: none;
+    width: 70%;
+    padding: 5px;
+}
