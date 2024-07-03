@@ -1140,6 +1140,7 @@
         pAmount2 = amount;
         console.log(packageId1);
         packageId= packageId1;
+        console.log(packageId);
         // Reset styles of all buttons
         const allButtons = document.querySelectorAll('.packageSelectBtn');
         allButtons.forEach(btn => {
@@ -1728,6 +1729,9 @@
                             // Log partner discount to console
                             console.log('Selected partner discount:', partnerDetails.discount);
                             partnerDiscount= partnerDetails.discount;
+
+                            packageId=partnerDetails.packageDetails.packageId;
+                            console.log(packageId,partnerDetails);
                             fetchPackageDetails2(selectedPartnerId,partnerDetails.discount);
                         })
                         .catch(error => console.error('Error fetching partner details:', error));

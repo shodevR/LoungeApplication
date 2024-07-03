@@ -18,7 +18,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         if (isAdmin) {
             response.sendRedirect("/voucherlist");
         } else {
-            response.sendRedirect("/");
+            response.sendRedirect("/ticket");
         }
     }
 }
